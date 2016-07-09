@@ -37,6 +37,51 @@ m4_ifdef([AC_USE_SYSTEM_EXTENSIONS],
 	[AC_GNU_SOURCE]
 )
 
+# Root-check
+host_is="`uname`"
+case $host_os in
+CYGWIN*)
+	;;
+*)
+	if type id >/dev/null 2>&1; then
+		euid="`id -u`"
+		if test "$euid" == "0"; then
+			echo ""
+			echo "********************************************************************************"
+			echo '*                            W A R N I N G      /!\                            *'
+			echo "********************************************************************************"
+			echo "* It appears that you're planning to run Hercules with root privileges. That's *"
+			echo "* not necessary, nor recommended, and it may open your machine to unnecessary  *"
+			echo "* security risks.  You should never ever run software as root unless it        *"
+			echo "* requires the extra privileges (which Hercules does not.)                     *"
+			echo "*                                                                              *"
+			echo "* More info:                                                                   *"
+			echo "* http://www.tldp.org/HOWTO/Security-HOWTO/local-security.html                 *"
+			echo "* https://wiki.debian.org/sudo                                                 *"
+			echo "* http://wiki.centos.org/TipsAndTricks/BecomingRoot                            *"
+			echo "* http://fedoraproject.org/wiki/Configuring_Sudo                               *"
+			echo "* https://help.ubuntu.com/community/RootSudo                                   *"
+			echo "* http://www.freebsdwiki.net/index.php/Root                                    *"
+			echo "*                                                                              *"
+			echo "* If your service provider forces (or encourages) you to run server software   *"
+			echo "* as root, please complain to them. It is a very bad idea.                     *"
+			echo "********************************************************************************"
+			echo "Execution will be paused for 60 seconds... Press Ctrl-C now if you wish to stop."
+			for j in 1 2 3 4 5 6; do
+				for i in 1 2 3 4 5 6 7 8 9 10; do
+					printf "\a. "
+					sleep 1
+				done
+				echo ""
+			done
+			echo ""
+			echo "Resuming as root. If anything breaks, you'll get to keep the pieces."
+			sleep 2
+		fi
+	fi
+	;;
+esac
+
 #
 # Memory managers
 #
@@ -95,6 +140,36 @@ AC_ARG_ENABLE(
 	],
 	[enable_packetver_re="no"]
 )
+
+
+#
+# Epoll
+#
+AC_ARG_ENABLE([epoll],
+	[AS_HELP_STRING([--enable-epoll],[use epoll(4) on Linux])],
+	[enable_epoll=$enableval],
+	[enable_epoll=no]
+)
+if test x$enable_epoll = xno; then
+	have_linux_epoll=no
+else
+	AC_MSG_CHECKING([for Linux epoll(4)])
+	AC_LINK_IFELSE([AC_LANG_PROGRAM(
+		[
+		#ifndef __linux__
+		#error This is not Linux
+		#endif
+		#include <sys/epoll.h>
+		],
+		[epoll_create1 (EPOLL_CLOEXEC);])],
+		[have_linux_epoll=yes],
+		[have_linux_epoll=no]
+	)
+	AC_MSG_RESULT([$have_linux_epoll])
+fi
+if test x$enable_epoll,$have_linux_epoll = xyes,no; then
+    AC_MSG_ERROR([epoll support explicitly enabled but not available])
+fi
 
 
 #
@@ -1087,6 +1162,18 @@ fi
 case $enable_packetver_re in
 	"yes")
 		CPPFLAGS="$CPPFLAGS -DENABLE_PACKETVER_RE"
+		;;
+	"no")
+		# default value
+		;;
+esac
+
+#
+# Epoll
+#
+case $have_linux_epoll in
+	"yes")
+		CPPFLAGS="$CPPFLAGS -DSOCKET_EPOLL"
 		;;
 	"no")
 		# default value

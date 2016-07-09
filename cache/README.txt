@@ -1,8 +1,8 @@
-//============================================================
-//= Hercules Cache Folder Readme File
-//===== By: ==================================================
-//= Hercules Dev Team
-//============================================================
+// ================================================ ============
+// = brHercules Arquivo Cache pasta Readme
+// ===== Por: ========================================= =========
+// = brHercules Dev Team
+// ================================================ ============
 
-Don't touch these folders or files inside of them!
-They are read and written by the server during runtime when it feels it is wise.
+Não toque nestas pastas ou arquivos dentro deles!
+Eles são lidos e gravados pelo servidor durante a execução quando se sente que é sábio.
