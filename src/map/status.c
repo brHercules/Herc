@@ -1170,46 +1170,6 @@ void initChangeTables(void) {
 	status->dbs->ChangeFlagTable[SC_MAGICAL_FEATHER] |= SCB_NONE;
 	status->dbs->ChangeFlagTable[SC_BLOSSOM_FLUTTERING] |= SCB_NONE;
 
-	/* status->dbs->DisplayType Table [Ind/Hercules] */
-	status->dbs->DisplayType[SC_ALL_RIDING]          = true;
-	status->dbs->DisplayType[SC_PUSH_CART]           = true;
-	status->dbs->DisplayType[SC_SUMMON1]             = true;
-	status->dbs->DisplayType[SC_SUMMON2]             = true;
-	status->dbs->DisplayType[SC_SUMMON3]             = true;
-	status->dbs->DisplayType[SC_SUMMON4]             = true;
-	status->dbs->DisplayType[SC_SUMMON5]             = true;
-	status->dbs->DisplayType[SC_CAMOUFLAGE]          = true;
-	status->dbs->DisplayType[SC_DUPLELIGHT]          = true;
-	status->dbs->DisplayType[SC_ORATIO]              = true;
-	status->dbs->DisplayType[SC_FROSTMISTY]          = true;
-	status->dbs->DisplayType[SC_VENOMIMPRESS]        = true;
-	status->dbs->DisplayType[SC_HALLUCINATIONWALK]   = true;
-	status->dbs->DisplayType[SC_ROLLINGCUTTER]       = true;
-	status->dbs->DisplayType[SC_BANDING]             = true;
-	status->dbs->DisplayType[SC_COLD]                = true;
-	status->dbs->DisplayType[SC_DEEP_SLEEP]          = true;
-	status->dbs->DisplayType[SC_CURSEDCIRCLE_ATKER]  = true;
-	status->dbs->DisplayType[SC_CURSEDCIRCLE_TARGET] = true;
-	status->dbs->DisplayType[SC_BLOOD_SUCKER]        = true;
-	status->dbs->DisplayType[SC__SHADOWFORM]         = true;
-	status->dbs->DisplayType[SC_MONSTER_TRANSFORM]   = true;
-
-	// Costumes
-	status->dbs->DisplayType[SC_MOONSTAR]            = true;
-	status->dbs->DisplayType[SC_SUPER_STAR]          = true;
-	status->dbs->DisplayType[SC_STRANGELIGHTS]       = true;
-	status->dbs->DisplayType[SC_DECORATION_OF_MUSIC] = true;
-	status->dbs->DisplayType[SC_LJOSALFAR]           = true;
-	status->dbs->DisplayType[SC_MERMAID_LONGING]     = true;
-	status->dbs->DisplayType[SC_HAT_EFFECT]          = true;
-	status->dbs->DisplayType[SC_FLOWERSMOKE]         = true;
-	status->dbs->DisplayType[SC_FSTONE]              = true;
-	status->dbs->DisplayType[SC_HAPPINESS_STAR]      = true;
-	status->dbs->DisplayType[SC_MAPLE_FALLS]         = true;
-	status->dbs->DisplayType[SC_TIME_ACCESSORY]      = true;
-	status->dbs->DisplayType[SC_MAGICAL_FEATHER]     = true;
-	status->dbs->DisplayType[SC_BLOSSOM_FLUTTERING]  = true;
-
 	if( !battle_config.display_hallucination ) //Disable Hallucination.
 		status->dbs->IconChangeTable[SC_ILLUSION] = SI_BLANK;
 #undef add_sc
@@ -7434,7 +7394,7 @@ int status_change_start(struct block_list *src, struct block_list *bl, enum sc_t
 				return 0;
 			break;
 		case SC_MAGNIFICAT:
-			if (sc->data[SC_OFFERTORIUM] || sc->option&OPTION_MADOGEAR) // Mado is immune to magnificat
+			if (sc->option&OPTION_MADOGEAR) // Mado is immune to magnificat
 				return 0;
 			break;
 		case SC_ONEHANDQUICKEN:
@@ -7637,10 +7597,6 @@ int status_change_start(struct block_list *src, struct block_list *bl, enum sc_t
 			if(sc->data[SC_HOVERING])
 				return 0;
 			break;
-		case SC_OFFERTORIUM:
-			if (sc->data[SC_MAGNIFICAT])
-				return 0;
-			break;
 	}
 
 	//Check for BOSS resistances
@@ -7747,6 +7703,14 @@ int status_change_start(struct block_list *src, struct block_list *bl, enum sc_t
 		case SC_KYRIE:
 			//Cancels Assumptio
 			status_change_end(bl, SC_ASSUMPTIO, INVALID_TIMER);
+			break;
+		case SC_MAGNIFICAT:
+			//Cancels Offertorium
+			status_change_end(bl, SC_OFFERTORIUM, INVALID_TIMER);
+			break;
+		case SC_OFFERTORIUM:
+			//Cancels Magnificat
+			status_change_end(bl, SC_MAGNIFICAT, INVALID_TIMER);
 			break;
 		case SC_DELUGE:
 			if (sc->data[SC_FOGWALL] && sc->data[SC_BLIND])
@@ -13006,6 +12970,10 @@ bool status_readdb_scconfig(char* fields[], int columns, int current) {
 	}
 
 	status->dbs->sc_conf[val] = (int)strtol(fields[1], NULL, 0);
+	if (status->dbs->sc_conf[val] & SC_VISIBLE)
+	{
+		status->dbs->DisplayType[val] = true;
+	}
 
 	return true;
 }

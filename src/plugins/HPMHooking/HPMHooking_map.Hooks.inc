@@ -10866,6 +10866,32 @@ void HP_clif_sc_load(struct block_list *bl, int tid, enum send_target target, in
 	}
 	return;
 }
+void HP_clif_sc_continue(struct block_list *bl, int tid, enum send_target target, int type, int val1, int val2, int val3) {
+	int hIndex = 0;
+	if( HPMHooks.count.HP_clif_sc_continue_pre ) {
+		void (*preHookFunc) (struct block_list **bl, int *tid, enum send_target *target, int *type, int *val1, int *val2, int *val3);
+		*HPMforce_return = false;
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_clif_sc_continue_pre; hIndex++ ) {
+			preHookFunc = HPMHooks.list.HP_clif_sc_continue_pre[hIndex].func;
+			preHookFunc(&bl, &tid, &target, &type, &val1, &val2, &val3);
+		}
+		if( *HPMforce_return ) {
+			*HPMforce_return = false;
+			return;
+		}
+	}
+	{
+		HPMHooks.source.clif.sc_continue(bl, tid, target, type, val1, val2, val3);
+	}
+	if( HPMHooks.count.HP_clif_sc_continue_post ) {
+		void (*postHookFunc) (struct block_list *bl, int tid, enum send_target target, int type, int val1, int val2, int val3);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_clif_sc_continue_post; hIndex++ ) {
+			postHookFunc = HPMHooks.list.HP_clif_sc_continue_post[hIndex].func;
+			postHookFunc(bl, tid, target, type, val1, val2, val3);
+		}
+	}
+	return;
+}
 void HP_clif_sc_end(struct block_list *bl, int tid, enum send_target target, int type) {
 	int hIndex = 0;
 	if( HPMHooks.count.HP_clif_sc_end_pre ) {
@@ -64462,6 +64488,33 @@ void HP_script_load_translations(void) {
 		}
 	}
 	return;
+}
+bool HP_script_load_translation_addstring(const char *file, uint8 lang_id, const char *msgctxt, const struct script_string_buf *msgid, const struct script_string_buf *msgstr) {
+	int hIndex = 0;
+	bool retVal___ = false;
+	if( HPMHooks.count.HP_script_load_translation_addstring_pre ) {
+		bool (*preHookFunc) (const char **file, uint8 *lang_id, const char **msgctxt, const struct script_string_buf **msgid, const struct script_string_buf **msgstr);
+		*HPMforce_return = false;
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_script_load_translation_addstring_pre; hIndex++ ) {
+			preHookFunc = HPMHooks.list.HP_script_load_translation_addstring_pre[hIndex].func;
+			retVal___ = preHookFunc(&file, &lang_id, &msgctxt, &msgid, &msgstr);
+		}
+		if( *HPMforce_return ) {
+			*HPMforce_return = false;
+			return retVal___;
+		}
+	}
+	{
+		retVal___ = HPMHooks.source.script.load_translation_addstring(file, lang_id, msgctxt, msgid, msgstr);
+	}
+	if( HPMHooks.count.HP_script_load_translation_addstring_post ) {
+		bool (*postHookFunc) (bool retVal___, const char *file, uint8 lang_id, const char *msgctxt, const struct script_string_buf *msgid, const struct script_string_buf *msgstr);
+		for(hIndex = 0; hIndex < HPMHooks.count.HP_script_load_translation_addstring_post; hIndex++ ) {
+			postHookFunc = HPMHooks.list.HP_script_load_translation_addstring_post[hIndex].func;
+			retVal___ = postHookFunc(retVal___, file, lang_id, msgctxt, msgid, msgstr);
+		}
+	}
+	return retVal___;
 }
 int HP_script_load_translation(const char *file, uint8 lang_id) {
 	int hIndex = 0;

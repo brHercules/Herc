@@ -1170,6 +1170,8 @@ typedef int (*HPMHOOK_pre_clif_skill_itemlistwindow) (struct map_session_data **
 typedef int (*HPMHOOK_post_clif_skill_itemlistwindow) (int retVal___, struct map_session_data *sd, uint16 skill_id, uint16 skill_lv);
 typedef void (*HPMHOOK_pre_clif_sc_load) (struct block_list **bl, int *tid, enum send_target *target, int *type, int *val1, int *val2, int *val3);
 typedef void (*HPMHOOK_post_clif_sc_load) (struct block_list *bl, int tid, enum send_target target, int type, int val1, int val2, int val3);
+typedef void (*HPMHOOK_pre_clif_sc_continue) (struct block_list **bl, int *tid, enum send_target *target, int *type, int *val1, int *val2, int *val3);
+typedef void (*HPMHOOK_post_clif_sc_continue) (struct block_list *bl, int tid, enum send_target target, int type, int val1, int val2, int val3);
 typedef void (*HPMHOOK_pre_clif_sc_end) (struct block_list **bl, int *tid, enum send_target *target, int *type);
 typedef void (*HPMHOOK_post_clif_sc_end) (struct block_list *bl, int tid, enum send_target target, int type);
 typedef void (*HPMHOOK_pre_clif_initialstatus) (struct map_session_data **sd);
@@ -5990,6 +5992,8 @@ typedef int (*HPMHOOK_pre_script_string_dup) (char **str);
 typedef int (*HPMHOOK_post_script_string_dup) (int retVal___, char *str);
 typedef void (*HPMHOOK_pre_script_load_translations) (void);
 typedef void (*HPMHOOK_post_script_load_translations) (void);
+typedef bool (*HPMHOOK_pre_script_load_translation_addstring) (const char **file, uint8 *lang_id, const char **msgctxt, const struct script_string_buf **msgid, const struct script_string_buf **msgstr);
+typedef bool (*HPMHOOK_post_script_load_translation_addstring) (bool retVal___, const char *file, uint8 lang_id, const char *msgctxt, const struct script_string_buf *msgid, const struct script_string_buf *msgstr);
 typedef int (*HPMHOOK_pre_script_load_translation) (const char **file, uint8 *lang_id);
 typedef int (*HPMHOOK_post_script_load_translation) (int retVal___, const char *file, uint8 lang_id);
 typedef int (*HPMHOOK_pre_script_translation_db_destroyer) (union DBKey *key, struct DBData **data, va_list ap);
