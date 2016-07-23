@@ -2,7 +2,7 @@
  * This file is part of Hercules.
  * http://herc.ws - http://github.com/HerculesWS/Hercules
  *
- * Copyright (C) 2012-2015  Hercules Dev Team
+ * Copyright (C) 2012-2016  Hercules Dev Team
  * Copyright (C)  Athena Dev Teams
  *
  * Hercules is free software: you can redistribute it and/or modify
@@ -683,49 +683,95 @@ static int bl_getall_area(int type, int m, int x0, int y0, int x1, int y1, int (
 	x1 = min(x1, map->list[m].xs - 1);
 	y1 = min(y1, map->list[m].ys - 1);
 
-	for (by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++) {
-		for (bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++) {
-			if (type&~BL_MOB) {
-				for (bl = map->list[m].block[bx + by * map->list[m].bxs]; bl != NULL; bl = bl->next) {
-					if (bl->type&type && bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1) {
-						if( map->bl_list_count >= map->bl_list_size )
-							map_bl_list_expand();
-						if (func) {
-							va_start(args, func);
-							if (func(bl, args)) {
-								map->bl_list[map->bl_list_count++] = bl;
-								found++;
+	{
+		const int x0b = x0 / BLOCK_SIZE;
+		const int x1b = x1 / BLOCK_SIZE;
+		const int y0b = y0 / BLOCK_SIZE;
+		const int y1b = y1 / BLOCK_SIZE;
+		const struct map_data *const listm = &map->list[m];
+		const int bxs0 = listm->bxs;
+
+		// duplication for better performance
+		if (func != NULL) {
+			if (type & ~BL_MOB) {
+				for (by = y0b; by <= y1b; by++) {
+					const int bxs = by * bxs0;
+					for (bx = x0b; bx <= x1b; bx++) {
+						for (bl = listm->block[bx + bxs]; bl != NULL; bl = bl->next) {
+							const int x = bl->x;
+							const int y = bl->y;
+							if (bl->type & type && x >= x0 && x <= x1 && y >= y0 && y <= y1) {
+								va_start(args, func);
+								if (func(bl, args)) {
+									if (map->bl_list_count >= map->bl_list_size)
+										map_bl_list_expand();
+									map->bl_list[map->bl_list_count++] = bl;
+									found++;
+								}
+								va_end(args);
 							}
-							va_end(args);
-						} else {
-							map->bl_list[map->bl_list_count++] = bl;
-							found++;
 						}
 					}
 				}
 			}
-			if (type&BL_MOB) { // TODO: fix this code duplication
-				for (bl = map->list[m].block_mob[bx + by * map->list[m].bxs]; bl != NULL; bl = bl->next) {
-					if (bl->x >= x0 && bl->x <= x1 && bl->y >= y0 && bl->y <= y1) {
-						if( map->bl_list_count >= map->bl_list_size )
-							map_bl_list_expand();
-						if (func) {
-							va_start(args, func);
-							if (func(bl, args)) {
+			if (type & BL_MOB) {
+				for (by = y0b; by <= y1b; by++) {
+					const int bxs = by * bxs0;
+					for (bx = x0b; bx <= x1b; bx++) {
+						for (bl = listm->block_mob[bx + bxs]; bl != NULL; bl = bl->next) {
+							const int x = bl->x;
+							const int y = bl->y;
+							if (x >= x0 && x <= x1 && y >= y0 && y <= y1) {
+								va_start(args, func);
+								if (func(bl, args)) {
+									if (map->bl_list_count >= map->bl_list_size)
+										map_bl_list_expand();
+									map->bl_list[map->bl_list_count++] = bl;
+									found++;
+								}
+								va_end(args);
+							}
+						}
+					}
+				}
+			}
+		} else {  // func != NULL
+			if (type & ~BL_MOB) {
+				for (by = y0b; by <= y1b; by++) {
+					const int bxs = by * bxs0;
+					for (bx = x0b; bx <= x1b; bx++) {
+						for (bl = listm->block[bx + bxs]; bl != NULL; bl = bl->next) {
+							const int x = bl->x;
+							const int y = bl->y;
+							if (bl->type & type && x >= x0 && x <= x1 && y >= y0 && y <= y1) {
+								if (map->bl_list_count >= map->bl_list_size)
+									map_bl_list_expand();
 								map->bl_list[map->bl_list_count++] = bl;
 								found++;
 							}
-							va_end(args);
-						} else {
-							map->bl_list[map->bl_list_count++] = bl;
-							found++;
+						}
+					}
+				}
+			}
+			if (type & BL_MOB) {
+				for (by = y0b; by <= y1b; by++) {
+					const int bxs = by * bxs0;
+					for (bx = x0b; bx <= x1b; bx++) {
+						for (bl = listm->block_mob[bx + bxs]; bl != NULL; bl = bl->next) {
+							const int x = bl->x;
+							const int y = bl->y;
+							if (x >= x0 && x <= x1 && y >= y0 && y <= y1) {
+								if (map->bl_list_count >= map->bl_list_size)
+									map_bl_list_expand();
+								map->bl_list[map->bl_list_count++] = bl;
+								found++;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-
 	return found;
 }
 
@@ -2851,7 +2897,7 @@ void map_cellfromcache(struct map_data *m) {
 		size = (unsigned long)info->xs*(unsigned long)info->ys;
 
 		// TO-DO: Maybe handle the scenario, if the decoded buffer isn't the same size as expected? [Shinryo]
-		decode_zip(decode_buffer, &size, m->cellPos+sizeof(struct map_cache_map_info), info->len);
+		grfio->decode_zip(decode_buffer, &size, m->cellPos+sizeof(struct map_cache_map_info), info->len);
 		CREATE(m->cell, struct mapcell, size);
 
 		// Set cell properties
@@ -3579,17 +3625,18 @@ void map_flags_init(void) {
 int map_waterheight(char* mapname)
 {
 	char fn[256];
-	char *rsw, *found;
+	char *rsw = NULL;
+	const char *found;
 
 	nullpo_retr(NO_WATER, mapname);
 	//Look up for the rsw
 	snprintf(fn, sizeof(fn), "data\\%s.rsw", mapname);
 
-	if ( (found = grfio_find_file(fn)) )
+	if ((found = grfio->find_file(fn)))
 		safestrncpy(fn, found, sizeof(fn)); // replace with real name
 
 	// read & convert fn
-	rsw = (char *) grfio_read (fn);
+	rsw = grfio_read(fn);
 	if (rsw) {
 		//Load water height from file
 		int wh = (int) *(float*)(rsw+166);
@@ -3613,7 +3660,7 @@ int map_readgat (struct map_data* m)
 	nullpo_ret(m);
 	sprintf(filename, "data\\%s.gat", m->name);
 
-	gat = (uint8 *) grfio_read(filename);
+	gat = grfio_read(filename);
 	if (gat == NULL)
 		return 0;
 
@@ -5677,8 +5724,8 @@ int do_final(void) {
 	map->map_db->destroy(map->map_db, map->db_final);
 
 	mapindex->final();
-	if(map->enable_grf)
-		grfio_final();
+	if (map->enable_grf)
+		grfio->final();
 
 	db_destroy(map->id_db);
 	db_destroy(map->pc_db);
@@ -6122,8 +6169,8 @@ int do_init(int argc, char *argv[])
 		}
 	}
 
-	if(map->enable_grf)
-		grfio_init(map->GRF_PATH_FILENAME);
+	if (map->enable_grf)
+		grfio->init(map->GRF_PATH_FILENAME);
 
 	map->readallmaps();
 

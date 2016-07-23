@@ -2,7 +2,7 @@
  * This file is part of Hercules.
  * http://herc.ws - http://github.com/HerculesWS/Hercules
  *
- * Copyright (C) 2012-2015  Hercules Dev Team
+ * Copyright (C) 2012-2016  Hercules Dev Team
  * Copyright (C)  Athena Dev Teams
  *
  * Hercules is free software: you can redistribute it and/or modify
@@ -4931,7 +4931,7 @@ void clif_skillinfo(struct map_session_data *sd,int skill_id, int inf)
 /// is disposable:
 ///     0 = yellow chat text "[src name] will use skill [skill name]."
 ///     1 = no text
-void clif_skillcasting(struct block_list* bl, int src_id, int dst_id, int dst_x, int dst_y, uint16 skill_id, int property, int casttime)
+void clif_useskill(struct block_list* bl, int src_id, int dst_id, int dst_x, int dst_y, uint16 skill_id, uint16 skill_lv, int casttime)
 {
 #if PACKETVER < 20091124
 	const int cmd = 0x13e;
@@ -4939,6 +4939,7 @@ void clif_skillcasting(struct block_list* bl, int src_id, int dst_id, int dst_x,
 	const int cmd = 0x7fb;
 #endif
 	unsigned char buf[32];
+	int property = skill->get_ele(skill_id, skill_lv);
 
 	WBUFW(buf,0) = cmd;
 	WBUFL(buf,2) = src_id;
@@ -9547,7 +9548,8 @@ void clif_parse_LoadEndAck(int fd, struct map_session_data *sd) {
 		clif->clearunit_area(&sd->bl, CLR_DEAD);
 	else {
 		skill->usave_trigger(sd);
-		sd->ud.dir = 0;/* enforce north-facing (not visually, virtually) */
+		if (battle_config.player_warp_keep_direction == 1)
+			clif->changed_dir(&sd->bl, SELF); // Visually updates player facing direction
 	}
 
 	// Trigger skill effects if you appear standing on them
@@ -10076,7 +10078,7 @@ void clif_parse_ActionRequest_sub(struct map_session_data *sd, int action_type, 
 			if( sd->sc.option&OPTION_COSTUME )
 				return;
 
-			if (!battle_config.sdelay_attack_enable && pc->checkskill(sd, SA_FREECAST) <= 0) {
+			if (!battle_config.sdelay_attack_enable && pc->checkskill(sd, SA_FREECAST) <= 0 && (skill->get_inf2(sd->ud.skill_id) & (INF2_FREE_CAST_REDUCED | INF2_FREE_CAST_NORMAL)) == 0) {
 				if (DIFF_TICK(tick, sd->ud.canact_tick) < 0) {
 					clif->skill_fail(sd, 1, USESKILL_FAIL_SKILLINTERVAL, 0);
 					return;
@@ -12878,7 +12880,8 @@ bool clif_validate_emblem(const uint8 *emblem, unsigned long emblem_len) {
 	int header = 0, bitmap = 0, offbits = 0, palettesize = 0;
 
 	nullpo_retr(false, emblem);
-	if( decode_zip(buf, &buf_len, emblem, emblem_len) != 0 || buf_len < BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE
+	if (grfio->decode_zip(buf, &buf_len, emblem, emblem_len) != 0
+	 || buf_len < BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE
 	 || RBUFW(buf,0) != 0x4d42 // BITMAPFILEHEADER.bfType (signature)
 	 || RBUFL(buf,2) != buf_len // BITMAPFILEHEADER.bfSize (file size)
 	 || RBUFL(buf,14) != BITMAPINFOHEADER_SIZE // BITMAPINFOHEADER.biSize (other headers are not supported)
@@ -19353,7 +19356,7 @@ void clif_defaults(void) {
 	clif->skill_poseffect = clif_skill_poseffect;
 	clif->skill_estimation = clif_skill_estimation;
 	clif->skill_warppoint = clif_skill_warppoint;
-	clif->skillcasting = clif_skillcasting;
+	clif->useskill = clif_useskill;
 	clif->produce_effect = clif_produceeffect;
 	clif->devotion = clif_devotion;
 	clif->spiritball = clif_spiritball;

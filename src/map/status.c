@@ -2169,9 +2169,7 @@ int status_calc_pet_(struct pet_data *pd, enum e_status_calc_opt opt)
 
 	if (battle_config.pet_lv_rate && pd->msd) {
 		struct map_session_data *sd = pd->msd;
-		int lv;
-
-		lv =sd->status.base_level*battle_config.pet_lv_rate/100;
+		int lv = sd->status.base_level * battle_config.pet_lv_rate / 100;
 		if (lv < 0)
 			lv = 1;
 		if (lv != pd->pet.level || opt&SCO_FIRST) {
@@ -2630,7 +2628,7 @@ int status_calc_pc_(struct map_session_data* sd, enum e_status_calc_opt opt) {
 
 	// Job bonuses
 	index = pc->class2idx(sd->status.class_);
-	for(i=0;i<(int)sd->status.job_level && i<MAX_LEVEL;i++){
+	for (i = 0; i < sd->status.job_level && i < MAX_LEVEL; i++) {
 		if(!status->dbs->job_bonus[index][i])
 			continue;
 		switch(status->dbs->job_bonus[index][i]) {
@@ -3888,8 +3886,16 @@ void status_calc_bl_main(struct block_list *bl, /*enum scb_flag*/int flag) {
 #endif
 			if ( st->aspd_rate != 1000 ) // absolute percentage modifier
 				amotion = amotion * st->aspd_rate / 1000;
-			if ( sd && sd->ud.skilltimer != INVALID_TIMER && pc->checkskill(sd, SA_FREECAST) > 0 )
-				amotion = amotion * 5 * (pc->checkskill(sd, SA_FREECAST) + 10) / 100;
+			if (sd && sd->ud.skilltimer != INVALID_TIMER) {
+				if (pc->checkskill(sd, SA_FREECAST) > 0) {
+					amotion = amotion * 5 * (pc->checkskill(sd, SA_FREECAST) + 10) / 100;
+				} else {
+					struct unit_data *ud = unit->bl2ud(bl);
+					if (ud && (skill->get_inf2(ud->skill_id) & INF2_FREE_CAST_REDUCED) != 0) {
+						amotion = amotion * 5 * (ud->skill_lv + 10) / 100;
+					}
+				}
+			}
 #ifdef RENEWAL_ASPD
 			amotion += (max(0xc3 - amotion, 2) * (st->aspd_rate2 + status->calc_aspd(bl, sc, 2))) / 100;
 			amotion = 10 * (200 - amotion) + sd->bonus.aspd_add;
@@ -5499,19 +5505,22 @@ signed short status_calc_mdef2(struct block_list *bl, struct status_change *sc, 
 unsigned short status_calc_speed(struct block_list *bl, struct status_change *sc, int speed)
 {
 	struct map_session_data *sd = BL_CAST(BL_PC, bl);
-	int speed_rate;
+	int speed_rate = -1;
 
 	if( sc == NULL || ( sd && sd->state.permanent_speed ) )
 		return (unsigned short)cap_value(speed,MIN_WALK_SPEED,MAX_WALK_SPEED);
 
-	if( sd && sd->ud.skilltimer != INVALID_TIMER && (pc->checkskill(sd,SA_FREECAST) > 0 || sd->ud.skill_id == LG_EXEEDBREAK) )
+	if (sd && sd->ud.skilltimer != INVALID_TIMER)
 	{
-		if( sd->ud.skill_id == LG_EXEEDBREAK )
+		if (sd->ud.skill_id == LG_EXEEDBREAK) {
 			speed_rate = 160 - 10 * sd->ud.skill_lv;
-		else
+		} else if ((skill->get_inf2(sd->ud.skill_id) & INF2_FREE_CAST_REDUCED) != 0) {
+			speed_rate = 175 - 5 * sd->ud.skill_lv;
+		} else if (pc->checkskill(sd, SA_FREECAST) > 0) {
 			speed_rate = 175 - 5 * pc->checkskill(sd,SA_FREECAST);
+		}
 	}
-	else
+	if (speed_rate == -1)
 	{
 		speed_rate = 100;
 
@@ -11402,17 +11411,7 @@ int status_change_timer(int tid, int64 tick, int id, intptr_t data) {
 							mushroom_skill_id = skill->dbs->magicmushroom_db[i].skill_id;
 						} while (mushroom_skill_id == 0);
 
-						switch( skill->get_casttype(mushroom_skill_id) ) { // Magic Mushroom skills are buffs or area damage
-							case CAST_GROUND:
-								skill->castend_pos2(bl,bl->x,bl->y,mushroom_skill_id,1,tick,0);
-								break;
-							case CAST_NODAMAGE:
-								skill->castend_nodamage_id(bl,bl,mushroom_skill_id,1,tick,0);
-								break;
-							case CAST_DAMAGE:
-								skill->castend_damage_id(bl,bl,mushroom_skill_id,1,tick,0);
-								break;
-						}
+						skill->castend_type(skill->get_casttype(mushroom_skill_id), bl, bl, mushroom_skill_id, 1, tick, 0);
 					}
 
 					clif->emotion(bl,E_HEH);
