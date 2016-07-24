@@ -7,7 +7,7 @@ Build Status:
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/3892/badge.svg)](https://scan.coverity.com/projects/herculesws-hercules)
 
 Issues and pull requests:  
-[![Open Issues](https://img.shields.io/github/issues-raw/HerculesWS/Hercules.svg?label=Open%20Issues)](https://github.com/HerculesWS/Hercules/issues)
+[![Open Issues](https://img.shields.io/github/issues-raw/HerculesWS/Hercules.svg?label=Open%20Issues)](https://github.com/brHercules/Herc/issues)
 [![Issues in progress](https://badge.waffle.io/HerculesWS/Hercules.svg?label=status%3Aconfirmed&title=In%20Progress)](https://waffle.io/HerculesWS/Hercules)
 [![Ready PRs](https://badge.waffle.io/HerculesWS/Hercules.svg?label=status%3Aready&title=Ready%20PRs)](https://waffle.io/HerculesWS/Hercules)
 
