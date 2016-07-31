@@ -5,32 +5,32 @@
 //=      |  _  |/ _ \ '__/ __| | | | |/ _ \/ __|
 //=      | | | |  __/ | | (__| |_| | |  __/\__ \
 //=      \_| |_/\___|_|  \___|\__,_|_|\___||___/
-//================= License ===============================================
-//= This file is part of Hercules.
-//= http://herc.ws - http://github.com/HerculesWS/Hercules
-//=
-//= Copyright (C) 2012-2016  Hercules Dev Team
-//= Copyright (C)  Athena Dev Teams
-//=
-//= Hercules is free software: you can redistribute it and/or modify
-//= it under the terms of the GNU General Public License as published by
-//= the Free Software Foundation, either version 3 of the License, or
-//= (at your option) any later version.
-//=
-//= This program is distributed in the hope that it will be useful,
-//= but WITHOUT ANY WARRANTY; without even the implied warranty of
-//= MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//= GNU General Public License for more details.
-//=
-//= You should have received a copy of the GNU General Public License
-//= along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//=========================================================================
-//= The Airship System Script
-//================= Description ===========================================
-//= The Airship System used in the official servers.
-//=========================================================================
+//================= Licença ===============================================
+// = Este arquivo é parte do Hércules.
+// = Http://herc.ws - http://github.com/HerculesWS/Hercules
+// =
+// = Copyright (C) 2012-2016 Hercules Dev Team
+// = Copyright (C) Athena Dev equipes
+// =
+// = Hercules é um software livre: você pode redistribuí-lo e/ou modificá-lo 
+// = sob os termos da GNU General Public License conforme publicada pela
+// = Free Software Foundation, tanto a versão 3 da licença, ou
+// = (A seu critério) qualquer versão posterior.
+// =
+// = Este programa é distribuído na esperança que possa ser útil,
+// = Mas SEM QUALQUER GARANTIA; mesmo sem a garantia implícita de
+// = COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM. veja a
+// = GNU General Public License para mais detalhes.
+// =
+// = Você deve ter recebido uma cópia da Licença Pública Geral GNU
+// = Junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+// =======================================================================
+// = Script Sistema dirigível
+// ================= Descrição ===========================================
+// = O Sistema dirigível usado nos servidores oficiais.
+// =======================================================================
 
-//=== Domestic Airship Route ===============================
+//=== Rota do Dirigível===================================================
 // ... -> Juno -> Einbroch -> Lighthalzen -> Einbroch ->
 // -> Juno -> Hugel -> ...
 airplane,243,73,0	script	#AirshipWarp-1	WARPNPC,1,1,{
@@ -49,7 +49,7 @@ OnUnhide:
 
 OnTouch:
 	switch ($@airplanelocation) {
-	case 0: warp "yuno",92,260; end;
+	case 0: warp "juno",92,260; end;
 	case 1: warp "einbroch",92,278; end;
 	case 2: warp "lighthalzen",302,75; end;
 	case 3: warp "hugel",181,146; end;
@@ -58,36 +58,36 @@ OnTouch:
 
 airplane,243,29,0	duplicate(#AirshipWarp-1)	#AirshipWarp-2	WARPNPC,1,1
 
-airplane,1,1,0	script	Domestic_Airship	FAKE_NPC,{
+airplane,1,1,0	script	Dirigível	FAKE_NPC,{
 	end;
 OnInit:
 	initnpctimer;
 	end;
 OnTimer20000:
-	mapannounce("airplane", _("We are heading to Einbroch."), bc_map, "0x00ff00");
+	mapannounce("Dirigível", _("Estamos a caminho de Einbroch."), bc_map, "0x00ff00");
 	end;
 OnTimer50000:
-	mapannounce("airplane", _("We will arrive in Einbroch shortly."), bc_map, "0x00ff00");
+	mapannounce("Dirigível", _("Logo chegaremos a Einbroch."), bc_map, "0x00ff00");
 	end;
 OnTimer60000:
 	$@airplanelocation = 1;
 	donpcevent "#AirshipWarp-1::OnUnhide";
 	donpcevent "#AirshipWarp-2::OnUnhide";
-	mapannounce("airplane", _("Welcome to Einbroch. Have a safe trip."), bc_map, "0x00ff00");
+	mapannounce("Dirigível", _("Be vindo a Einbroch. Tenha uma viagem segura."), bc_map, "0x00ff00");
 	end;
 OnTimer70000:
-	mapannounce("airplane", _("Currently we are in Einbroch. The Airship will take off shortly."), bc_map, "0x00ff00");
+	mapannounce("Dirigível", _("Atualmente estamos em Einbroch. O dirigível vai decolar em breve."), bc_map, "0x00ff00");
 	end;
 OnTimer80000:
 	donpcevent "#AirshipWarp-1::OnHide";
 	donpcevent "#AirshipWarp-2::OnHide";
-	mapannounce("airplane", _("The Airship is now taking off. Our next destination is Lighthalzen."), bc_map, "0x70dbdb");
+	mapannounce("Dirigível", _("O dirigível está decolando. Nosso próximo destino é Lighthalzen."), bc_map, "0x70dbdb");
 	end;
 OnTimer100000:
-	mapannounce("airplane", _("We are heading to Lighthalzen."), bc_map, "0x70dbdb");
+	mapannounce("Dirigível", _("Estamos a caminho de Lighthalzen."), bc_map, "0x70dbdb");
 	end;
 OnTimer130000:
-	mapannounce("airplane", _("We will arrive in Lighthalzen shortly."), bc_map, "0x70dbdb");
+	mapannounce("Dirigível", _("We will arrive in Lighthalzen shortly."), bc_map, "0x70dbdb");
 	end;
 OnTimer140000:
 	$@airplanelocation = 2;
