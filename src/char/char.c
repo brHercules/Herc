@@ -805,7 +805,7 @@ int char_memitemdata_to_sql(const struct item items[], int max, int id, int tabl
 					StrBuf->Printf(&buf, "UPDATE `%s` SET `amount`='%d', `equip`='%u', `identify`='%d', `refine`='%d',`attribute`='%d', `expire_time`='%u', `bound`='%d'",
 						tablename, items[i].amount, items[i].equip, items[i].identify, items[i].refine, items[i].attribute, items[i].expire_time, items[i].bound);
 					for (j = 0; j < MAX_SLOTS; ++j)
-						StrBuf->Printf(&buf, ", `card%d`=%d", j, items[i].card[j]);
+						StrBuf->Printf(&buf, ", `card%d`='%d'", j, items[i].card[j]);
 					if (has_favorite)
 						StrBuf->Printf(&buf, ", `favorite`='%d'", items[i].favorite);
 					StrBuf->Printf(&buf, " WHERE `id`='%d' LIMIT 1", item.id);
@@ -3807,8 +3807,11 @@ int char_parse_frommap(int fd)
 		int packet_id = RFIFOW(fd,0);
 		if (VECTOR_LENGTH(HPM->packets[hpParse_FromMap]) > 0) {
 			int result = HPM->parse_packets(fd,packet_id,hpParse_FromMap);
-			if (result == 1)
+			if (result == 1) {
+				if (sockt->session[fd] == NULL)
+					return 0;
 				continue;
+			}
 			if (result == 2)
 				return 0;
 		}
