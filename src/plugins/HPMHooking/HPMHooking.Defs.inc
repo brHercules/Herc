@@ -1396,8 +1396,8 @@ typedef void (*HPMHOOK_pre_clif_buyvending) (struct map_session_data **sd, int *
 typedef void (*HPMHOOK_post_clif_buyvending) (struct map_session_data *sd, int index, int amount, int fail);
 typedef void (*HPMHOOK_pre_clif_openvending) (struct map_session_data **sd, int *id, struct s_vending **vending_list);
 typedef void (*HPMHOOK_post_clif_openvending) (struct map_session_data *sd, int id, struct s_vending *vending_list);
-typedef void (*HPMHOOK_pre_clif_vendingreport) (struct map_session_data **sd, int *index, int *amount);
-typedef void (*HPMHOOK_post_clif_vendingreport) (struct map_session_data *sd, int index, int amount);
+typedef void (*HPMHOOK_pre_clif_vendingreport) (struct map_session_data **sd, int *index, int *amount, uint32 *char_id, int *zeny);
+typedef void (*HPMHOOK_post_clif_vendingreport) (struct map_session_data *sd, int index, int amount, uint32 char_id, int zeny);
 typedef void (*HPMHOOK_pre_clif_storagelist) (struct map_session_data **sd, struct item **items, int *items_length);
 typedef void (*HPMHOOK_post_clif_storagelist) (struct map_session_data *sd, struct item *items, int items_length);
 typedef void (*HPMHOOK_pre_clif_updatestorageamount) (struct map_session_data **sd, int *amount, int *max_amount);
@@ -1684,8 +1684,8 @@ typedef void (*HPMHOOK_pre_clif_buyingstore_itemlist) (struct map_session_data *
 typedef void (*HPMHOOK_post_clif_buyingstore_itemlist) (struct map_session_data *sd, struct map_session_data *pl_sd);
 typedef void (*HPMHOOK_pre_clif_buyingstore_trade_failed_buyer) (struct map_session_data **sd, short *result);
 typedef void (*HPMHOOK_post_clif_buyingstore_trade_failed_buyer) (struct map_session_data *sd, short result);
-typedef void (*HPMHOOK_pre_clif_buyingstore_update_item) (struct map_session_data **sd, unsigned short *nameid, unsigned short *amount);
-typedef void (*HPMHOOK_post_clif_buyingstore_update_item) (struct map_session_data *sd, unsigned short nameid, unsigned short amount);
+typedef void (*HPMHOOK_pre_clif_buyingstore_update_item) (struct map_session_data **sd, unsigned short *nameid, unsigned short *amount, uint32 *char_id, int *zeny);
+typedef void (*HPMHOOK_post_clif_buyingstore_update_item) (struct map_session_data *sd, unsigned short nameid, unsigned short amount, uint32 char_id, int zeny);
 typedef void (*HPMHOOK_pre_clif_buyingstore_delete_item) (struct map_session_data **sd, short *index, unsigned short *amount, int *price);
 typedef void (*HPMHOOK_post_clif_buyingstore_delete_item) (struct map_session_data *sd, short index, unsigned short amount, int price);
 typedef void (*HPMHOOK_pre_clif_buyingstore_trade_failed_seller) (struct map_session_data **sd, short *result, unsigned short *nameid);
@@ -1764,6 +1764,8 @@ typedef void (*HPMHOOK_pre_clif_ackmergeitems) (int *fd, struct map_session_data
 typedef void (*HPMHOOK_post_clif_ackmergeitems) (int fd, struct map_session_data *sd);
 typedef bool (*HPMHOOK_pre_clif_isdisguised) (struct block_list **bl);
 typedef bool (*HPMHOOK_post_clif_isdisguised) (bool retVal___, struct block_list *bl);
+typedef void (*HPMHOOK_pre_clif_navigate_to) (struct map_session_data **sd, const char **mapname, uint16 *x, uint16 *y, uint8 *flag, bool *hideWindow, uint16 *mob_id);
+typedef void (*HPMHOOK_post_clif_navigate_to) (struct map_session_data *sd, const char *mapname, uint16 x, uint16 y, uint8 flag, bool hideWindow, uint16 mob_id);
 typedef unsigned char (*HPMHOOK_pre_clif_bl_type) (struct block_list **bl);
 typedef unsigned char (*HPMHOOK_post_clif_bl_type) (unsigned char retVal___, struct block_list *bl);
 typedef void (*HPMHOOK_pre_clif_pWantToConnection) (int *fd, struct map_session_data **sd);
@@ -6508,6 +6510,12 @@ typedef void (*HPMHOOK_pre_skill_validate_additional_fields) (struct config_sett
 typedef void (*HPMHOOK_post_skill_validate_additional_fields) (struct config_setting_t *conf, struct s_skill_db *sk);
 typedef bool (*HPMHOOK_pre_skill_validate_skilldb) (struct s_skill_db **skt, const char **source);
 typedef bool (*HPMHOOK_post_skill_validate_skilldb) (bool retVal___, struct s_skill_db *skt, const char *source);
+typedef int (*HPMHOOK_pre_skill_validate_weapontype_sub) (const char **type, bool *on, struct s_skill_db **sk);
+typedef int (*HPMHOOK_post_skill_validate_weapontype_sub) (int retVal___, const char *type, bool on, struct s_skill_db *sk);
+typedef int (*HPMHOOK_pre_skill_validate_ammotype_sub) (const char **type, bool *on, struct s_skill_db **sk);
+typedef int (*HPMHOOK_post_skill_validate_ammotype_sub) (int retVal___, const char *type, bool on, struct s_skill_db *sk);
+typedef int (*HPMHOOK_pre_skill_validate_unit_flag_sub) (const char **type, bool *on, struct s_skill_db **sk);
+typedef int (*HPMHOOK_post_skill_validate_unit_flag_sub) (int retVal___, const char *type, bool on, struct s_skill_db *sk);
 typedef bool (*HPMHOOK_pre_skill_read_skilldb) (const char **filename);
 typedef bool (*HPMHOOK_post_skill_read_skilldb) (bool retVal___, const char *filename);
 typedef void (*HPMHOOK_pre_skill_config_set_level) (struct config_setting_t **conf, int **arr);
