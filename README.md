@@ -9,34 +9,31 @@ Issues and pull requests:
 [![Issues in progress](https://badge.waffle.io/brHercules/Herc.svg?label=status%3Aconfirmed&title=In%20Progress)](https://waffle.io/brHercules/Herc)
 [![Ready PRs](https://badge.waffle.io/brHercules/Herc.svg?label=status%3Aready&title=Ready%20PRs)](https://waffle.io/brHercules/Herc)
 
-Development and Community:  
-https://img.shields.io/badge/brHercules-70%25-green.svg
-
 Project Info:  
 ![Language](https://img.shields.io/badge/language-C-yellow.svg)
 [![License](https://img.shields.io/badge/license-GPLv3-663399.svg)](https://github.com/HerculesWS/Hercules/blob/master/LICENSE)
 
 Índice
 ---------
-* 1 O que é Hercules?
+* 1 O que é brHercules?
 * 2 Pré-requisitos
 * 3 Instalação
 * 4 Solução de problemas
 * 5 Ligações úteis
 * 6 Mais Documentação
 
-O que é Hercules?
+O que é brHercules?
 -----------------
 Hercules é um projeto de desenvolvimento de software colaborativo que gira em torno do
-criação de um jogo multiplayer robusto jogo online papel (MMORPG)
-pacote do servidor. Escrito em C, o programa é muito versátil e fornece NPCs,
-teias e modificações. O projecto é gerido conjuntamente por um grupo de
+criação de um jogo multiplayer (MMORPG).
+Escrito em C, o programa é muito versátil e fornece NPCs e varias modificações.
+O projecto é gerido conjuntamente por um grupo de
 voluntários localizados em todo o mundo, bem como uma comunidade enorme fornecendo
-QA e suporte. Hercules é uma continuação do projeto Athena originais.
+QA e suporte. brHercules é uma continuação do projeto Athena originais.
 
 Pré-requisitos
 -------------
-Antes de instalar o Hercules há certas ferramentas e aplicações que você vai
+Antes de instalar o brHercules há certas ferramentas e aplicações que você vai
 necessidade. Isso difere entre os sistemas operacionais variados disponíveis, de modo a
 a seguir é dividido em Windows e Unix (incl. Linux) pré-requisitos.
 
