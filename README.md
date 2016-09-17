@@ -1,224 +1,217 @@
-Hercules
+brHercules
 ========
 
 Build Status:  
-[![Build Status](https://travis-ci.org/HerculesWS/Hercules.svg)](https://travis-ci.org/HerculesWS/Hercules)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/cm9xbwurpbltqjop?svg=true)](https://ci.appveyor.com/project/Haru/hercules)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/3892/badge.svg)](https://scan.coverity.com/projects/herculesws-hercules)
+[![Build Status](https://travis-ci.org/brHercules/Herc.svg?branch=master)](https://travis-ci.org/brHercules/Herc)
 
 Issues and pull requests:  
-[![Open Issues](https://img.shields.io/github/issues-raw/HerculesWS/Hercules.svg?label=Open%20Issues)](https://github.com/HerculesWS/Hercules/issues)
-[![Issues in progress](https://badge.waffle.io/HerculesWS/Hercules.svg?label=status%3Aconfirmed&title=In%20Progress)](https://waffle.io/HerculesWS/Hercules)
-[![Ready PRs](https://badge.waffle.io/HerculesWS/Hercules.svg?label=status%3Aready&title=Ready%20PRs)](https://waffle.io/HerculesWS/Hercules)
+[![Open Issues](https://img.shields.io/github/issues-raw/brHercules/Herc.svg?label=Open%20Issues)](https://github.com/brHercules/Herc/issues)
+[![Issues in progress](https://badge.waffle.io/brHercules/Herc.svg?label=status%3Aconfirmed&title=In%20Progress)](https://waffle.io/brHercules/Herc)
+[![Ready PRs](https://badge.waffle.io/brHercules/Herc.svg?label=status%3Aready&title=Ready%20PRs)](https://waffle.io/brHercules/Herc)
 
 Development and Community:  
-[![GitHub Repository](https://img.shields.io/badge/github-HerculesWS/Hercules-green.svg)](https://github.com/HerculesWS/Hercules)
-[![Waffle Board](https://img.shields.io/badge/waffle-HerculesWS/Hercules-6699dd.svg)](https://waffle.io/HerculesWS/Hercules)  
-[![IRC](https://img.shields.io/badge/IRC-Rizon/Hercules-yellow.svg)](irc://rizon.net/Hercules)
-[![Community Forum](https://img.shields.io/badge/forum-herc.ws-orange.svg)](http://herc.ws)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HerculesWS/Hercules)  
-[![Twitter](https://img.shields.io/badge/twitter-@HerculesWS-blue.svg)](https://twitter.com/HerculesWS)
+https://img.shields.io/badge/brHercules-70%25-green.svg
 
 Project Info:  
 ![Language](https://img.shields.io/badge/language-C-yellow.svg)
 [![License](https://img.shields.io/badge/license-GPLv3-663399.svg)](https://github.com/HerculesWS/Hercules/blob/master/LICENSE)
 
-Table of Contents
+Índice
 ---------
-* 1 What is Hercules?
-* 2 Prerequisites
-* 3 Installation
-* 4 Troubleshooting
-* 5 Helpful Links
-* 6 More Documentation
+* 1 O que é Hercules?
+* 2 Pré-requisitos
+* 3 Instalação
+* 4 Solução de problemas
+* 5 Ligações úteis
+* 6 Mais Documentação
 
-What is Hercules?
+O que é Hercules?
 -----------------
-Hercules is a collaborative software development project revolving around the
-creation of a robust massively multiplayer online role playing game (MMORPG)
-server package. Written in C, the program is very versatile and provides NPCs,
-warps and modifications. The project is jointly managed by a group of
-volunteers located around the world as well as a tremendous community providing
-QA and support. Hercules is a continuation of the original Athena project.
+Hercules é um projeto de desenvolvimento de software colaborativo que gira em torno do
+criação de um jogo multiplayer robusto jogo online papel (MMORPG)
+pacote do servidor. Escrito em C, o programa é muito versátil e fornece NPCs,
+teias e modificações. O projecto é gerido conjuntamente por um grupo de
+voluntários localizados em todo o mundo, bem como uma comunidade enorme fornecendo
+QA e suporte. Hercules é uma continuação do projeto Athena originais.
 
-Prerequisites
+Pré-requisitos
 -------------
-Before installing Hercules there are certain tools and applications you will
-need.  This differs between the varying operating systems available, so the
-following is broken down into Windows and Unix (incl. Linux) prerequisites.
+Antes de instalar o Hercules há certas ferramentas e aplicações que você vai
+necessidade. Isso difere entre os sistemas operacionais variados disponíveis, de modo a
+a seguir é dividido em Windows e Unix (incl. Linux) pré-requisitos.
 
-For a list of supported platforms, please refer to the [Supported
-Platforms](https://github.com/HerculesWS/Hercules/wiki/Supported-Platforms) wiki page.
+Para obter uma lista de plataformas suportadas, consulte o [Apoiado
+Plataformas] (https://github.com/HerculesWS/Hercules/wiki/Supported-Platforms) página wiki.
 
-#### Windows
-  - Git client
-  - MySQL-compatible server ([MySQL Community Edition](https://www.mysql.com/products/community/) or
-    [MariaDB](https://mariadb.org/))
-  - Microsoft Visual Studio ([Version 2012 through 2015](https://www.visualstudio.com/))
+#### Janelas
+  - Cliente Git
+  - Servidor MySQL compatível ([MySQL Community Edition] (https://www.mysql.com/products/community/) ou
+    [MariaDB] (https://mariadb.org/))
+  - Microsoft Visual Studio ([Versão 2012 a 2015] (https://www.visualstudio.com/))
 
-#### Unix/Linux/BSD (names of packages may require specific version numbers on certain distributions)
-  - git
-  - gcc or clang (version 4.5 or newer, recommended 5.0 or newer)
-  - GNU make
-  - mysql (`mysql-server`) or mariadb
-  - libmysqlclient (`mysql-devel`)
-  - zlib (`zlib-devel`)
-  - libpcre (`pcre-devel`)
-  - *Optional dependencies for development only*
-    - perl (required to rebuild the HPM Hooks and HPMDataCheck)
-    - Doxygen (required to rebuild the HPM Hooks and HPMDataCheck)
+#### Unix / Linux / BSD (nomes de pacotes podem exigir números de versão específicas sobre determinadas distribuições)
+  - git
+  - Gcc ou clang (versão 4.5 ou mais recente, recomendado 5.0 ou mais recente)
+  - GNU make
+  - MySQL (mysql-server`) ou MariaDB
+  - libmysqlclient ( `mysql-devel`)
+  - Zlib ( `zlib-devel`)
+  - libpcre ( `pcre-devel`)
+  - * Dependências opcionais para o desenvolvimento só *
+    - Perl (necessário para reconstruir os Hooks HPM e HPMDataCheck)
+    - Doxygen (necessário para reconstruir os Hooks HPM e HPMDataCheck)
 
 #### Mac OS X
-  - Xcode or the Xcode command-line tools.
-  - MySQL-compatible server (installation of `mysql` or `mariadb` through [Homebrew](http://brew.sh/) is recommended)
-  - PCRE library (installation of `pcre` through [Homebrew](http://brew.sh) is recommended)
-  - *Optional dependencies for development only*
-    - Doxygen (required to rebuild the HPM Hooks and HPMDataCheck)
+  - Xcode ou as ferramentas de linha de comando do Xcode.
+  - Servidor MySQL compatível (instalação de `mysql` ou` mariadb` através [Homebrew] (http://brew.sh/) é recomendado)
+  - Biblioteca PCRE (instalação de `pcre` através [Homebrew] (http://brew.sh) é recomendado)
+  - * Dependências opcionais para o desenvolvimento só *
+    - Doxygen (necessário para reconstruir os Hooks HPM e HPMDataCheck)
 
-#### Optional, useful tools
-  - MySQL GUI clients
-    - [MySQL Workbench](http://www.mysql.com/downloads/workbench/) (cross-platform)
-    - [HeidiSQL](http://www.heidisql.com/) (Windows)
-    - [Sequel Pro](http://www.sequelpro.com/) (Mac OS X)
-  - GUI Git clients
-    - [Atlassian SourceTree](https://www.sourcetreeapp.com/) (Windows, Mac OS X)
-    - [TortoiseGit](https://tortoisegit.org/) (Windows)
+#### opcionais, ferramentas úteis
+  - clientes MySQL GUI
+    - [MySQL Workbench] (http://www.mysql.com/downloads/workbench/) (cross-platform)
+    - [HeidiSQL] (http://www.heidisql.com/) (Windows)
+    - [Sequel Pro] (http://www.sequelpro.com/) (Mac OS X)
+  - clientes GUI Git
+    - [Atlassian SourceTree] (https://www.sourcetreeapp.com/) (Windows, Mac OS X)
+    - [TortoiseGit] (https://tortoisegit.org/) (Windows)
 
 
-Installation
+Instalação
 ------------
 
-This section is a very brief set of installation instructions. For more concise
-guides relevant to your Operation System, please refer to the Wiki (links at
-the end of this file).
+Esta seção é um breve conjunto de instruções de instalação. Para mais concisa
+guias relevantes para o seu sistema de operação, consulte o Wiki (links na
+o fim do ficheiro).
 
-#### Windows
-  1. Install the prerequisites.
-  2. Clone the Hercules repository (see [GitHub](https://github.com/HerculesWS/Hercules)) using a git client, into a new
-     folder.
-  3. Connect to the MySQL server as root:
-    - Create a database (hercules): `CREATE DATABASE hercules;`
-    - Create a user (hercules): `CREATE USER 'hercules'@'localhost' IDENTIFIED BY 'password';`.
-    - Give permissions (GRANT SELECT,INSERT,UPDATE,DELETE) to the user: `GRANT SELECT,INSERT,UPDATE,DELETE ON
-      \`hercules\`.* TO 'hercules'@'localhost';`
-  4. Connect to the MySQL server as the new user:
-    - Import the .sql files in /sql-files/ into the new database.
-  5. Start Visual Studio and load the provided solution:
-    - Compile and run the three projects, login-server, char-server, map-server.
+#### Janelas
+  1. Instalar os pré-requisitos.
+  2. Clone o repositório Hercules (ver [GitHub] (https://github.com/HerculesWS/Hercules)) usando um cliente git, em um novo
+     pasta.
+  3. Conecte-se ao servidor MySQL como root:
+    - Criar um banco de dados (Hercules): CREATE Hercules banco de dados; `
+    - Crie um usuário (Hercules): CREATE 'Hercules' user @ 'localhost' identificado por 'password'; `.
+    - Dê permissões (GRANT SELECT, INSERT, UPDATE, DELETE) para o usuário: GRANT SELECT, INSERT, UPDATE, DELETE ON
+      \ `Hércules \` * TO 'Hercules' @ 'localhost';. '
+  4. Conecte-se ao servidor MySQL como o novo usuário:
+    - Importe os arquivos .sql em / SQL-files / para o novo banco de dados.
+  5. Inicie o Visual Studio e carregar a solução fornecida:
+    - Compilar e executar os três projetos, login-servidor, char-servidor, mapa-servidor.
 
 #### Unix
-  1. Install the prerequisites through your distribution's package manager
-    - (Red Hat compatible / CentOS) `yum install gcc make mysql mysql-devel mysql-server pcre-devel zlib-devel git`
-    - (Debian compatible) `apt-get install gcc make libmysqlclient-dev zlib1g-dev libpcre3-dev mysql-server git`
-    - (FreeBSD) `pkg install clang35 gmake mysql56-server mysql-connector-c pcre git`
-    - (Mac OS X):
-      - Install Xcode through the Mac App Store
-      - Initialize the build tools through the Terminal `xcode-select --help`
-      - Install Homebrew as described on the project page
-      - Install the other prerequisites: `brew install mysql pcre`
-  2. Clone the Hercules repository `git clone https://github.com/HerculesWS/Hercules.git ~/Hercules`
-  3. Configure the MySQL server and start it.
-  4. Connect to the MySQL server as root:
-    - Create a database (hercules): `CREATE DATABASE hercules;`
-    - Create a user (hercules): `CREATE USER 'hercules'@'localhost' IDENTIFIED BY 'password';`.
-    - Give permissions (GRANT SELECT,INSERT,UPDATE,DELETE) to the user: `GRANT SELECT,INSERT,UPDATE,DELETE ON
-      \`hercules\`.* TO 'hercules'@'localhost';`
-  5. Connect to the MySQL server as the new user:
-    - Import the .sql files in /sql-files/ into the new database.
-  6. Enter the Hercules directory and configure/build Hercules
-    - `./configure`
-    - `make clean && make sql` (on FreeBSD, replace `make` with `gmake`)
-  7. Start the three servers login-server, char-server, map-server.
+  1. Instalar os pré-requisitos, através do gerenciador de pacotes da sua distribuição
+    - (Red Hat compatível / CentOS) `yum install make gcc mysql mysql-devel mysql-server pcre-devel git` zlib-devel
+    - (Debian compatível) `apt-get install gcc make git` libmysqlclient-dev zlib1g-dev libpcre3-dev mysql-server
+    - (FreeBSD) `pkg instalar clang35 gmake mysql56-server mysql-connector-c pcre git`
+    - (Mac OS X):
+      - Instale Xcode através da Mac App Store
+      - Inicializar as ferramentas de compilação através do Terminal `--help` xcode-select
+      - Instale Homebrew como descrito na página do projeto
+      - Instale os outros pré-requisitos: `bebida instalar mysql pcre`
+  2. Clone o repositório Hercules `git clone https://github.com/HerculesWS/Hercules.git ~ / Hercules`
+  3. Configure o servidor MySQL e iniciá-lo.
+  4. Conecte-se ao servidor MySQL como root:
+    - Criar um banco de dados (Hercules): CREATE Hercules banco de dados; `
+    - Crie um usuário (Hercules): CREATE 'Hercules' user @ 'localhost' identificado por 'password'; `.
+    - Dê permissões (GRANT SELECT, INSERT, UPDATE, DELETE) para o usuário: GRANT SELECT, INSERT, UPDATE, DELETE ON
+      \ `Hércules \` * TO 'Hercules' @ 'localhost';. '
+  5. Conecte-se ao servidor MySQL como o novo usuário:
+    - Importe os arquivos .sql em / SQL-files / para o novo banco de dados.
+  6. Introduza o diretório Hercules e configurar / construir Hercules
+    -. `/ Configure`
+    - `Make clean && make sql` (no FreeBSD, substitua` make` com `gmake`)
+  7. Inicie os três servidores login-servidor, char-servidor, mapa-servidor.
 
-Troubleshooting
+Solução de problemas
 ---------------
 
-If you're having problems with starting your server, the first thing you should
-do is check what's happening on your consoles. More often that not, all support
-issues can be solved simply by looking at the error messages given.
+Se você está tendo problemas com o início de seu servidor, a primeira coisa que você deve
+fazer é verificar o que está acontecendo em seus consoles. Mais frequentemente do que não, todo o apoio
+problemas podem ser resolvidos simplesmente por olhar para as mensagens de erro dadas.
 
-Examples:
+Exemplos:
 
-* You get an error on your map-server_sql that looks something like this:
+* Você recebe um erro no seu mapa-server_sql que é algo como isto:
 
-```
-[Error]: npc_parsesrcfile: Unable to parse, probably a missing or extra TAB in file 'npc/custom/jobmaster.txt', line '17'. Skipping line...
-        * w1=prontera,153,193,6 script
-        * w2=Job Master
-        * w3=123,{
-        * w4=
-```
+`` `
+[Erro]: npc_parsesrcfile: Não é possível analisar, provavelmente um TAB ausente ou extra no arquivo 'NPC / custom / jobmaster.txt', linha '17'. Ignorando linha ...
+        * W1 = prontera, 153,193,6 roteiro
+        * W2 = Mestre Job
+        * W3 = 123, {
+        * W4 =
+`` `
 
-  If you look at the error, it's telling you that you're missing (or have an
-  extra) TAB.  This is easily fixed by looking at this part of the error:
-  `* w1=prontera,153,193,6 script`.
-  If there was a TAB where it's supposed to be, that line would have
-  `prontera,153,193,6` at w1 and `script` at w2. As there's a space instead of a
-  TAB, the two sections are read as a single parameter.
+  Se você olhar para o erro, ele está dizendo que você está perdendo (ou ter um
+  adicional) TAB. Isto é facilmente corrigido por olhar para esta parte do erro:
+  `* W1 = prontera, 153,193,6 script`.
+  Se houvesse um guia onde é suposto ser, essa linha teria
+  `Prontera, 153,193,6` em script` w1 e` a w2. Como há um espaço em vez de um
+  TAB, as duas secções são lidos como um único parâmetro.
 
-* You have a default user/password warning similar to the following:
+* Você tem um aviso semelhante ao seguinte usuário / senha padrão:
 
-```
-[Warning]: Using the default user/password s1/p1 is NOT RECOMMENDED.
-[Notice]: Please edit your 'login' table to create a proper inter-server user/password (gender 'S')
-[Notice]: and then edit your user/password in conf/map-server.conf (or conf/import/map_conf.txt)
-```
+`` `
+[Warning]: Usando o usuário padrão / S1 senha / p1 não é recomendado.
+[Nota]: Por favor edite sua mesa 'login' para criar um verdadeiro usuário inter-servidor / password (gênero 'S')
+[Nota]: e, em seguida, editar o seu usuário / senha no conf / map-server.conf (ou conf / importação / map_conf.txt)
+`` `
 
-  Relax. This is just indicating that you're using the default username and password. To
-  fix this, check over the part in the installation instructions relevant to the `login` table.
+  Relaxe. Este é apenas o que indica que você está usando o nome de usuário e senha padrão. Para
+  corrigir isso, verifique sobre a parte nas instruções de instalação relevantes para a tabela `login`.
 
-* Your Map Server says the following:
+* O servidor Mapa diz o seguinte:
 
-```
-[Error]: make_connection: connect failed (socket #2, error 10061: No connection could be made because the target machine actively refused it.)!
-```
+`` `
+[Erro]: make_connection: conectar falhou (socket # 2, erro 10061:. Nenhuma conexão pôde ser feita porque a máquina de destino recusou ativamente)!
+`` `
 
-  If this shows up on the map server, it generally means that there is no Char
-  Server available to accept the connection.
+  Se este mostra-se no servidor de mapas, que geralmente significa que não há Char
+  Servidor disponível para aceitar a conexão.
 
-Helpful Links
+Links úteis
 -------------
 
-The following list of links point to various help files within the repository,
-articles or pages on the Wiki or topics within the Hercules forum.
+A lista de links a seguir apontam para vários arquivos de ajuda dentro do repositório,
+artigos ou páginas da Wiki ou tópicos dentro do fórum Hercules.
 
-* Hercules Forums:  
-  http://herc.ws/board/
+* Hercules Fórum:
+  http://herc.ws/board/
 
-* Hercules Wiki:  
-  http://herc.ws/wiki/Main_Page
+* Hercules Wiki:
+  http://herc.ws/wiki/Main_Page
 
-* Git Repository URL:  
-  https://github.com/HerculesWS/Hercules
+* Repositório Git URL:
+  https://github.com/HerculesWS/Hercules
 
-* Hercules IRC Channel:  
-  Network: `irc.rizon.net`  
-  Channel: `#Hercules`
+* Hercules IRC Canal:
+  Rede: `irc.rizon.net`
+  Canal: `# Hercules`
 
-More Documentation
+mais Documentação
 ------------------
 
-Hercules has a large collection of help files and sample NPC scripts located in
-/doc/
+Hercules tem uma grande coleção de arquivos de ajuda e scripts NPC amostras localizados em
+/ Doc /
 
 ### Scripting
-It is recommended to look through /doc/script_commands.txt for help, pointers or
-even for ideas for your next NPC script. Most script commands have a usage
-example.
+Recomenda-se a olhar o arquivo /doc/script_commands.txt Para obter ajuda ou até
+mesmo para ideias de seu próximo script NPC. A maioria dos comandos de script tem um uso
+exemplo.
 
-### `@commands`
-In-game, Game Masters have the ability to use Atcommands (`@`) to control
-players, create items, spawn mobs, reload configuration files and even control
-the weather.  For an in-depth explanation, please see /doc/atcommands.txt
+### `@ Commands`
+No jogo, os Game Masters tem a capacidade de usar Atcommands ( `` @) para controlar
+jogadores, criar itens, mobs spawn, recarregar os arquivos de configuração e até mesmo controle
+do clima. Para obter uma explicação detalhada, consulte /doc/atcommands.txt
 
-### Permissions
-The Hercules emulator has a permission system that enables certain groups of
-players to perform certain actions, or have access to certain visual
-enhancements or in-game activity. To see what permissions are available, they
-are detailed in /doc/permissions.txt
+### Permissão
+O emulador Hercules tem um sistema de permissão que permite que certos grupos de
+jogadores podem executar determinadas ações, ou ter acesso a certas melhorias visuais
+ou atividades dentro do jogo. Para ver quais permissões estão disponíveis, elas
+estão detalhados na /doc/permissions.txt
 
-### Others
-There are more files in the /doc/ directory that will help you to create scripts
-or update the mapcache, or even explain how the job system and item bonuses
-work. Before posting a topic asking for help on the forums, we recommend that
-all users take the time to look over this directory.
+### Outras
+Há mais arquivos no diretório /doc/ que irá ajudá-lo a criar scripts
+ou atualizar o MapCache, ou até mesmo explicar como funciona o sistema de classes e bônus de itens.
+Antes de postar um tópico pedindo ajuda nos fóruns, recomendamos que
+todos os usuários leiam este conteúdo.
