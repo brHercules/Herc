@@ -1,1143 +1,1072 @@
-//===== Hercules Documentation ===============================
-//= Atcommand List
-//===== By: ==================================================
-//= Hercules Dev Team
-//===== Current Version: =====================================
-//= 20130115
-//===== Description: =========================================
-//= List of available atcommands and their functions.
-//============================================================
+// ===== Documentação Hercules ===============================
+// = Lista Atcommand
+// ===== Por: ========================================= =========
+// = Dev Team Hercules
+// ===== Versão atual: =====================================
+// = 20130115
+// ===== Descrição: =========================================
+// = Lista de atcommands disponíveis e suas funções.
+// ================================================ ============
 
-This file describes the usage of in-game commands and assumes that
-'conf/atcommand.conf' has the following:
-	atcommand_symbol : "@"
-	charcommand_symbol: "#"
+Este arquivo descreve o uso de comandos no jogo e assume que
+"Conf/atcommand.conf 'tem o seguinte:
+atcommand_symbol: "@"
+charcommand_symbol: "#"
 
-To search for a command, write "@" before the command name (ex. @commands).
-The format of this file is as follows:
-	1. System Commands
-	2. Database Commands
-	3. Player Information Commands
-	4. Action Commands
-	5. Administrative Commands
-	6. Party Commands
-	7. Guild Commands
-	8. Pet Commands
-	9. Homunculus Commands
+Para procurar um comando, escreva "@" antes do nome do comando (ex. @comando).
+O formato deste arquivo é o seguinte:
+1. Comandos do sistema
+2. Comandos do Banco de Dados
+3. Comandos Informações do Jogador
+4. Comandos de Ação
+5. Comandos Administrativos
+6. Comandos do Grupo
+7. Comandos da Guilda
+8. Comandos do bichinho de estimação
+9. Comandos de Homunculus
 
 ======================
-| 1. System Commands |
+|1.Comandos do sistema|
 ======================
 
 @version
-
-Displays SVN version of the server.
+Exibe a versão SVN do servidor.
 
 ---------------------------------------
 
 @rates
 
-Displays the server rates.
+Exibe as taxas de servidor.
 
-Output Example:
-Experience rates: Base 1.00x / Job 1.00x
-Normal Drop Rates: Common 1.00x / Healing 1.00x / Usable 1.00x Equipment 1.00x / Card 1.00x
-Boss Drop Rates:  Common 1.00x / Healing 1.00x / Usable 1.00x Equipment 1.00x / Card 1.00x
-Other Drop Rates: MvP 1.00x / Card-Based 1.00x / Treasure 1.00x
+Exemplo de saída:
+Taxas de experiência: 1.00x Base/1.00x Job
+Drops normais: Normais 1.00x/Cura 1.00x/Ultilizável 1.00x/Equipamentos 1.00x/Cartas 1.00x
+Chefe Gota Preços: Normais 1.00x/Cura 1.00x/Ultilizável 1.00x/Equipamentos 1.00x/Cartas 1.00x
+Outros Gota Preços: O MVP 1.00x / 1.00x Baseado-Card / 1.00x Treasure
 
 ---------------------------------------
 
 @time
-
-Displays the local server time, along with day/night information.
- 
+Exibe a hora do servidor local, juntamente com informações de dia/noite.
+ 
 ---------------------------------------
 
 @uptime
 
-Show server uptime since last map server restart.
+Mostrar uptime servidor desde reinício do servidor último mapa.
 
-Output Example:
-Server Uptime: 3 days, 8 hours, 6 minutes, 4 seconds.
+Exemplo de saída:
+Uptime Servidor: 3 dias, 8 horas, 6 minutos, 4 segundos.
 
 ---------------------------------------
 
 @refresh
 @refreshall
 
-Synchronizes the player's position on the client with the one stored on the server.
-Additionally, @refreshall will refresh all online players.
+Sincroniza a posição do jogador no cliente com a armazenada no servidor.
+Além disso, @refreshall irá atualizar todos os jogadores on-line.
 
 ---------------------------------------
 
 @showexp
 
-Toggles the display of experience gain messages.
+Alterna a exibição de mensagens de ganhar experiência.
 
 ---------------------------------------
 
 @showzeny
 
-Toggles the display of Zeny gain messages.
-Configuration for zeny being dropped by mobs is in 'conf/map/battle/monster.conf':
+Alterna a exibição de mensagens de ganho Zeny.
+Configuração para zeny ser dispensado pela mobs é em 'conf / map / batalha / monster.conf':
 zeny_from_mobs: true
 
 ---------------------------------------
 
 @showdelay
 
-Shows or hides the red "Cannot use the skills" message.
+Mostra ou oculta a mensagem vermelha "Não é possível usar as habilidades".
 
-Output Example:
-[Storm Gust] Cannot use the skills.
+Exemplo de saída:
+[Storm Gust] Não é possível usar as habilidades.
 
 ---------------------------------------
-
 @noask
-
-Toggles automatic rejection of deals and invites.
-
+Alterna rejeição automática das ofertas e convites.
 ---------------------------------------
-
 @noks
-
-Toggles Kill Steal Protection.
-
+Alterna matar roubar Protection.
 ---------------------------------------
-
 @font <0-9>
-
-Sets client font (0 is the default).
-
+Define fonte do cliente (0 é o padrão).
 ---------------------------------------
-
 @agitstart
 @agitend
-
-Starts or ends War of Emperium [FE] by invoking scripts with the
-OnAgitStart/OnAgitEnd labels.
-
+Inicia ou termina War of Emperium [FE] por invocando scripts com o
+OnAgitStart / OnAgitEnd rótulos.
 ---------------------------------------
-
-@agitstart2
-@agitend2
-
-Starts or ends War of Emperium [SE] by invoking scripts with the
-OnAgitStart2/OnAgitEnd2 labels.
-
+@ agitstart2
+@ agitend2
+Inicia ou termina War of Emperium [SE] por invocando scripts com o
+OnAgitStart2 / OnAgitEnd2 rótulos.
 ---------------------------------------
-
 @pvpon
 @pvpoff
-
-Enables or disables PvP (Player vs. Player) mode on a map.
-
+Ativa ou desativa o modo PvP (Player versus Player) em um mapa.
 ---------------------------------------
-
 @gvgon
 @gvgoff
-
-Enables or disables GvG (Guild vs. Guild) mode on a map.
-
+Ativa ou desativa o modo de GVG (Grêmio vs Grêmio) em um mapa.
 ---------------------------------------
-
 @skillon
 @skilloff
-
-Enables or disables skill usage on a map.
-
+Ativa ou desativa o uso de habilidades em um mapa.
 ---------------------------------------
-
 @allowks
-
-Toggles Kill Steal Protection on a map.
-
+Alterna matar roubar Protecção em um mapa.
 ---------------------------------------
-
-@day
-@night
-
-Sets the server to day or night mode.
-
+@dia
+@noite
+Define o servidor-a-dia ou da noite modo.
 ---------------------------------------
-
 @sound <filename>
-
-Plays the specified sound.
-
+Toca o som especificado.
 ---------------------------------------
-
-@snow
-@clouds
-@clouds2
-@fog
-@fireworks
+@neve
+@nuvens
+@Clouds2
+@névoa
+@fogos de artifício
 @sakura
-@leaves
-
-Toggles weather effects on your map.
-
+@folhas
+Alterna os efeitos do tempo no seu mapa.
 ---------------------------------------
-
-@clearweather
-
-Stops all weather effects. May require a map change or @refresh
-for the effect to stop client-side.
-
+@tempo limpo
+Pára todos os efeitos do tempo. Pode exigir uma mudança de mapa ou @refresh
+para o efeito de parar do lado do cliente.
 ---------------------------------------
-
-@mapflag <flag> <value 0-1>
-
-Sets a mapflag for the current map (1 = On, 0 = Off).
-
+@mapflag <flag> <valor 0-1>
+Define um mapflag para o mapa atual (1 = On, 0 = Off).
 ---------------------------------------
-
-@addwarp <map> <x> <y> <npc name>
-
-Creates a warp portal on the character's current coordinates that lasts until the next reboot.
-The name parameter is mandatory and if it already exists, the server will automagically assign a name,
-and it will be displayed only once in the chat window.
-
-Example:
+@addwarp <map> <x> <y> <nome do NPC>
+Cria um portal de urdidura no coordenadas atuais do personagem que dura até a próxima reinicialização.
+O parâmetro de nome é obrigatório e se ele já existe, o servidor irá automagicamente atribuir um nome,
+e ele será exibido apenas uma vez na janela de chat.
+Exemplo:
 @addwarp prontera 50 50 my_warp_sample
-
-Output:
-New warp NPC 'my_warp_sample' created.
-
+Saída:
+New warp NPC 'my_warp_sample' criado.
 ---------------------------------------
-
-@effect <effect ID>
-
-Creates a visual effect on or around the character.
-A list of IDs can be found in '/db/constants.conf'.
-Descriptions of the effects can be found in '/doc/effect_list.txt'.
-
+@effect <efeito ID>
+Cria um efeito visual ou em torno da personagem.
+Uma lista de IDs pode ser encontrada em '/db/constants.conf'.
+As descrições dos efeitos pode ser encontrada em '/doc/effect_list.txt'.
 ---------------------------------------
-
 @misceffect
-
-Does some visual effect on the character (more info needed).
-
+Será que algum efeito visual sobre o caráter (saiba mais necessário).
 ---------------------------------------
-
-@displayskill <skill ID> {<skill level>}
-
-Displays the animation of a skill without really using it (debug function).
-
+@displayskill <habilidade ID> {<nível de habilidade>}
+Exibe a animação de uma habilidade sem realmente usá-lo (função de depuração).
 ---------------------------------------
-
 @option {<param 1> {<param 2> {<param 3>}}}
-
-Adds visual effects to the attached character.
-If no parameter is specified, a list of available options will be returned.
-
+Adiciona efeitos visuais para o personagem em anexo.
+Se nenhum parâmetro for especificado, será retornada uma lista de opções disponíveis.
 ---------------------------------------
-
-@displaystatus <status type> <flag> <tick> {<val1> {<val2> {<val3>}}}
-
-Displays a status change without really applying it (debug function).
-
+@displaystatus <tipo de status> <flag> <tick> {<val1> {<val2> {<val3>}}}
+Exibe uma mudança de status sem aplicá-la realmente (função de depuração).
 ---------------------------------------
-
-@send <Hex Number> {<value>}
-
-Used for testing packet sends from the client (debug function).
-Value: <type=B(default),W,L><number> or S<length>"<string>"
-
+@send <Hex Número> {<value>}
+Usado para pacotes de teste envia a partir da (função de depuração) cliente.
+Valor: <type = B (padrão), W, L> <number> ou S <length> "<string>"
 ---------------------------------------
-
 @mapinfo
-
-Displays information about the current map.
-
-Output Example:
------- Map Info ------
-Map Name: prontera | Players In Map: 1 | NPCs In Map: 127 | Chats In Map: 0
------- Map Flags ------
-Town Map
-Autotrade Enabled
-PvP Flags: 
-GvG Flags: 
-Teleport Flags: 
-No Exp Penalty: On | No Zeny Penalty: On
-Weather Flags: Displays Night | 
-Other Flags: NoBranch | Reset | 
-Other Flags: 
-
+Exibe informações sobre o mapa atual.
+Exemplo de saída:
+------ ------ Informações do mapa
+Mapa Nome: prontera | Os jogadores do Mapa: 1 | NPCs Em Mapa: 127 | Bate-papo Em Mapa: 0
+------ ------ Mapa Bandeiras
+town Mapa
+autotrade Ativado
+Bandeiras PvP:
+GvG Flags:
+Bandeiras Teleport:
+No Exp Penalidade: On | Sem Zeny Penalidade: On
+Bandeiras do tempo: Exibe Noite |
+Outras Bandeiras: NoBranch | repor |
+Outras Bandeiras:
 ---------------------------------------
 
 @gat
 
-Gives information about terrain/area (debug function).
+Fornece informações sobre (função de depuração) terreno / área.
 
-Output Example: 
-prontera (x= 165, y= 202) 00 00 00 00 00
-prontera (x= 165, y= 201) 01 00 00 00 00
-prontera (x= 165, y= 200) 01 00 00 00 00
-prontera (x= 165, y= 199) 01 00 00 00 00
-prontera (x= 165, y= 198) 01 00 00 00 00
+Exemplo de saída:
+prontera (x = 165, y = 202) 00 00 00 00 00
+prontera (x = 165, y = 201) 01 00 00 00 00
+prontera (x = 165, y = 200) 01 00 00 00 00
+prontera (x = 165, y = 199) 01 00 00 00 00
+prontera (x = 165, y = 198) 01 00 00 00 00
 
 ---------------------------------------
 
 ========================
-| 2. Database Commands |
+| 2. Banco de Dados Comandos |
 ========================
 
-@mobinfo <mob name/ID>
+@mobinfo <nome mob / ID>
 
-Displays monster information (rates, stats, drops, MVP data).
+Exibe informações de monstro (taxas, estatísticas, gotas, dados MVP).
 
-Example:
+Exemplo:
 @monsterinfo Poring
 
-Output:
-Monster: 'Poring'/'Poring'/'PORING' (1002)
-Lv: 1 HP:60 Base EXP:27 Job EXP:20 HIT:103 FLEE:183
-DEF:2 MDEF:5 STR:6 AGI:1 VIT:1 INT:1 DEX:6 LUK:5
-ATK:8~9 Range:1~10~12 Size:Medium Race:Plant Element:Water (Lv:1)
-Drops:
- - Jellopy 70.00% - Knife[4] 1.00% etc...
- 
+Saída:
+Monstro: 'Poring' / 'Poring' / 'PORING' (1002)
+Lv: 1 HP: 60 Base de EXP: EXP 27 Job: 20 HIT: 103 foge: 183
+DEF: 2 MDEF: 5 STR: 6 AGI: 1 VIT: 1 INT: 1 DEX: 6 LUK: 5
+ATK: 8 ~ 9 Intervalo: 1 ~ 10 ~ 12 Tamanho: Corrida Médio: Planta Elemento: Água (Lv: 1)
+Gotas:
+ - Jellopy 70,00% - faca [4] 1,00% etc ...
+ 
 ---------------------------------------
 
-@iteminfo <item name/ID>
+@iteminfo <item name / ID>
 
-Displays item information (type, price, weight, drops).
+Exibe informações de item (tipo, preço, peso, gotas).
 
-Example:
+Exemplo:
 @iteminfo Jellopy
 
-Output:
-Item: 'Jellopy'/'Jellopy'[0] (909) Type: Etc. | Extra Effect: None
-NPC Buy:6z, Sell:3z | Weight: 1.0
-- Maximal monsters drop change: 75.00%
+Saída:
+Item: 'Jellopy' / 'Jellopy' [0] (909) Tipo: Etc. | Efeito Extra: Nenhum
+Compra em NPC: 6z, Venda: 3z | Peso: 1,0
+- Monstros máximas cair mudança: 75,00%
 
 ---------------------------------------
 
-@whodrops <item name/ID>
+@whodrops <item name / ID>
 
-Displays a list of mobs which drop the specified item.
-Only the highest drop rates are shown. 
+Exibe uma lista de mobs que largar o item especificado.
+Somente as maiores taxas de queda são mostradas.
 
 ---------------------------------------
 
 @autoloot {<%>}
 
-Enables or disables autolooting items from killed mobs.
-If a percentage is given, only items dropped at that rate and below will be autolooted.
+Habilita ou desabilita itens autolooting de mobs mortos.
+Se a porcentagem é dado, apenas os itens caiu a essa taxa e abaixo será autolooted.
 
 ---------------------------------------
 
-@alootid <+/- item name/ID>
-@alootid reset
+@alootid <+/- nome do item / ID>
+@alootid redefinir
 
-Starts or stops autolooting a specified item.
-Typing "reset" will clear the autoloot item list.
-By default, 10 items can be autolooted at one time.
-
----------------------------------------
-
-@autoloottype <+/-><type name>
-@autoloottype reset
-
-Starts or stops autolooting a specified item type.
-Type List: healing, usable, etc, weapon, armor, card, petegg, petarmor, ammo.
-Typing "reset" will clear the autoloot item list.
+Inicia ou pára autolooting um item especificado.
+Digitando "reset" irá limpar a lista de itens autoloot.
+Por defeito, 10 itens podem ser autolooted de uma só vez.
 
 ---------------------------------------
 
+@autoloottype <+/-> <type name>
+@autoloottype redefinir
 
-@mobsearch <monster name>
-
-Locates and displays the position of a certain mob on the current map.
-
-Output Example:
-1[155:184] Poring
-2[154:188] Poring
-3[127:146] Poring
+Inicia ou pára autolooting um tipo de item especificado.
+Lista Tipo: cura, útil, etc, arma, armadura, cartão, petegg, petarmor, munição.
+Digitando "reset" irá limpar a lista de itens autoloot.
 
 ---------------------------------------
 
-@idsearch <item name>
 
-Looks up an item by name (or part of a name).
+@mobsearch <nome do monstro>
 
----------------------------------------
+Localiza e exibe a posição de um certo monstro no mapa atual.
 
-@showmobs <monster name/ID>
-
-Locates and displays the position of a certain mob on your mini-map.
-This shows up as a small white cross (+).
-
----------------------------------------
-
-@whereis
-
-Displays the maps in which monster normally spawns.
-This does not include mobs summoned by scripts.
+Exemplo de saída:
+1 [155: 184] Poring
+2 [154: 188] Poring
+3 [127: 146] Poring
 
 ---------------------------------------
 
-@skillid <skill name>
+@idsearch <nome do item>
 
-Looks up a skill by name (or part of a name).
-
----------------------------------------
-
-@skilltree <skill ID> <target>
-
-Lists requirements to obtain the specified skill on the target character.
+Espera-se um item por nome (ou parte de um nome).
 
 ---------------------------------------
 
-@questskill {<skill ID>}
-@lostskill {<skill ID>}
+@showmobs <nome do monstro / ID>
 
-Permanently adds or removes the specified quest skill.
-If no skill ID is specified, a list of available skills will be returned.
+Localiza e exibe a posição de um certo monstro em seu mini-mapa.
+Isto mostra-se como uma pequena cruz branca (+).
 
 ---------------------------------------
 
-@useskill <skill ID> <skill level> <target>
+@Onde é
 
-Casts the specified skill.
+Exibe os mapas em que monstro normalmente spawns.
+Isso não inclui mobs chamados por scripts.
 
-Example:
-@useskill 28 5 Char2
--> casts Level 5 Heal on player Char2
+---------------------------------------
+
+@skillid <nome de habilidade>
+
+Espera-se uma habilidade por nome (ou parte de um nome).
+
+---------------------------------------
+
+@skilltree <habilidade ID> <destino>
+
+requisitos de listas para obter a especialidade especificada no personagem alvo.
+
+---------------------------------------
+
+@questskill {<habilidade ID>}
+@lostskill {<habilidade ID>}
+
+Permanentemente adiciona ou remove a habilidade de quest especificado.
+Se nenhum ID habilidade for especificado, será retornada uma lista de habilidades disponíveis.
+
+---------------------------------------
+
+@useskill <habilidade ID> <nível de habilidade> <destino>
+
+Lança a especialidade especificada.
+
+Exemplo:
+@useskill 28 5 char2
+-> Lança Nível 5 Curar no jogador char2
 
 ---------------------------------------
 
 ==================================
-| 3. Player Information Commands |
+| 3. Informações do Jogador Comandos |
 ==================================
 
-@commands
+comandos @
 
-Displays a list of @ commands available to the player.
+Exibe uma lista de @ comandos disponíveis para o jogador.
 
 ---------------------------------------
 
 @charcommands
 
-Displays a list of # commands available to the player.
+Exibe uma lista de # comandos disponíveis para o jogador.
 
 ---------------------------------------
 
-@help <command>
+@HELP <command>
 
-Displays the help message for the specified command.
+Exibe a mensagem de ajuda para o comando especificado.
 
 ---------------------------------------
 
 @exp
 
-Displays current levels and % progress.
+Exibe os níveis actuais e% progresso.
 
-Output Example:
-Base Level: 13 (3.323%) | Job Level: 10 (0.000%)
-
----------------------------------------
-
-@stats
-
-Displays the stats of the attached player in your chat bar.
+Exemplo de saída:
+Nível Base: 13 (3.323%) | Nível de emprego: 10 (0,000%)
 
 ---------------------------------------
 
-@storagelist <player name>
+@Estatísticas
 
-Displays Kafra storage contents of the specified player.
-
----------------------------------------
-
-@cartlist <player name>
-
-Displays cart contents of the specified player.
+Exibe as estatísticas do jogador anexado na sua barra de chat.
 
 ---------------------------------------
 
-@itemlist
+@storagelist <nome do jogador>
 
-Displays inventory contents of the attached player.
+Exibe o conteúdo do armazenamento Kafra do jogador especificado.
 
 ---------------------------------------
 
-@who
-@who2
-@who3
+@cartlist <nome do jogador>
 
-Returns a list of online characters.
-@who will also return character positions.
-@who2 will also return job classes.
-@who3 will also return parties/guilds.
+Displays Compras de o jogador especificado.
+
+---------------------------------------
+
+@item da lista
+
+Exibe o conteúdo do inventário do jogador anexado.
+
+---------------------------------------
+
+@quem
+@ who2
+@ who3
+
+Retorna uma lista de personagens online.
+@who também retornará posições de caracteres.
+@ Who2 também retornará classes de trabalho.
+@ Who3 também retornará partidos / alianças.
 
 ---------------------------------------
 
 @whomap
-@whomap2
-@whomap3
+@ whomap2
+@ whomap3
 
-Returns a list of online characters in a specific map.
-@whomap will also return character positions.
-@whomap2 will also return job classes.
-@whomap3 will also return parties/guilds.
+Retorna uma lista de personagens online em um mapa específico.
+@whomap também retornará posições de caracteres.
+@ Whomap2 também retornará classes de trabalho.
+@ Whomap3 também retornará partidos / alianças.
 
 ---------------------------------------
 
 @whogm
 
-Returns a list of GMs online.
-For those who are higher GM level than yourself, only name is shown.
-For the rest, the command acts as a combination of @who+@who2+@who3.
+Retorna uma lista de GMs online.
+Para aqueles que são de nível superior GM do que você mesmo, apenas o nome é mostrado.
+Para o resto, o comando funciona como uma combinação de @ who + @ who2 + @ who3.
 
 ---------------------------------------
 
 @users
 
-Displays distribution of players on the server per map (% on each map which has players.)
+Apresenta distribuição dos jogadores no servidor por mapa (% em cada mapa que tem jogadores).
 
-Output Example:
+Exemplo de saída:
 prontera: 1 (50%)
 prt_fild01: 1 (50%)
-all: 2
+todos: 2
 
 ---------------------------------------
 
 @where <player_name>
 
-Locates a player on a map. The player must be online.
+Localiza um jogador em um mapa. O jogador deve estar on-line.
 
 ---------------------------------------
 
-@jailtime
+@tempo de prisão
 
-Displays remaining jail time.
-If @jail was used, the chat window will display "You have been jailed indefinitely".
+Exibe o tempo restante de prisão.
+Se @jail foi utilizado, a janela de bate-papo será exibido "Você foi preso indefinidamente".
 
 ---------------------------------------
 
-@accinfo <player name/account id>
+@accinfo <nome do jogador / id conta>
 
-Searches for an account by ID or a character name, and outputs detailed information.
-Password will only be displayed for group levels lower than yours.
-To search partial names, "%" can be used as a wildcard.
+Pesquisas para uma conta de ID ou um nome de personagem e saídas de informações detalhadas.
+Senha só serão exibidos para os níveis de grupo inferior que o seu.
+Para procurar nomes parciais, "%" pode ser usado como um carácter universal.
 
-Example:
-@accinfo Test%
+Exemplo:
+@accinfo Teste%
 
-Output:
--- Account 2000001 --
-User: user123 | GM Group: 0 | State: 0
+Saída:
+- Conta 2000001 -
+Usuário: user123 | Grupo GM: 0 | Estado: 0
 Password: password123
-Account e-mail: a@a.com
-Last IP: 127.0.0.1 (Unknown)
-This user has logged 27 times, the last time were at 2012-11-24 17:29:07
--- Character Details --
-[Slot/CID: 0/150001] Test1 | High Swordsman | Level: 99/50 | Off
-[Slot/CID: 1/150002] Test2 | Rune Knight | Level: 150/50 | On
+Conta de e-mail: a@a.com
+Última IP: 127.0.0.1 (Desconhecido)
+Este utilizador registado 27 vezes, a última vez que estavam em 2012/11/24 17:29:07
+- Detalhes do personagem -
+[Slot / CID: 0/150001] Test1 | Alta Swordsman | Nível: 99/50 | Fora
+[Slot / CID: 1/150002] Test2 | Rune Cavaleiro | Nível: 150/50 | Em
 
 ======================
-| 4. Action Commands |
+| 4. Comandos de Acção |
 ======================
 
-@me <message>
+@me <mensagem>
 
-Displays the text as a normal message with the format "*name <message>*" instead of "name: <message>".
-
----------------------------------------
-
-@main {<message>}
-
-Broadcasts a message to all players with @main enabled.
-Using the command without a message will enable or disable main chat.
+Exibe o texto como uma mensagem normal com o formato "* nome <mensagem> *" em vez de "name: <message>".
 
 ---------------------------------------
 
-@storage
+@main {<mensagem>}
 
-Opens your Kafra storage.
- 
----------------------------------------
-
-@mail
-
-Opens your mailbox.
+Transmite uma mensagem a todos os jogadores com @main ativado.
+Usando o comando sem uma mensagem irá activar ou desactivar chat principal.
 
 ---------------------------------------
 
-@auction
+@armazenamento
 
-Opens the auction window.
+Abre o seu armazenamento Kafra.
+ 
+---------------------------------------
+
+@enviar
+
+Abre a caixa de correio.
 
 ---------------------------------------
 
-@identify
+@leilão
 
-Opens the Identification window if any unappraised items are in your inventory.
+Abre a janela do leilão.
 
 ---------------------------------------
 
-@trade <player name>
+@identificar
 
-Opens the trade window with the specified player.
+Abre a janela de Identificação se todos os itens unappraised estão em seu inventário.
+
+---------------------------------------
+
+@trade <nome do jogador>
+
+Abre a janela de comércio com o jogador especificado.
 
 ---------------------------------------
 
 @autotrade
 
-Allows you continue vending offline, then logs off.
-The character will continue vending until you log in to that account again,
-all items are sold, or the mapserver closes.
+Permite que você continue venda automática desligada, em seguida, termina a sessão.
+O personagem vai continuar venda automática até que você faça o login para essa conta mais uma vez,
+todos os itens são vendidos, ou o mapserver fecha.
 
 ---------------------------------------
 
-@monster <monster name/ID> {<amount>}
-@monstersmall <monster name/ID> {<amount>}
-@monsterbig <monster name/ID> {<amount>}
+@monster <nome do monstro / ID> {<montante>}
+@monstersmall <nome do monstro / ID> {<montante>}
+@monsterbig <nome do monstro / ID> {<montante>}
 
-Spawns the specified monster.
-If an amount is given, that number will be spawned.
-Additionally, monster size can be adjusted.
-
----------------------------------------
-
-@summon <monster name/ID> {<duration>}
-
-Spawns mobs that treat you as their master.
-If a duration is specified, they will stay with you until the duration has ended.
+Gera o monstro especificado.
+Se uma quantidade é dada, esse número será gerado.
+Além disso, o tamanho do monstro pode ser ajustado.
 
 ---------------------------------------
 
-@clone <player name/ID>
-@slaveclone <player name/ID>
-@evilclone <player name/ID>
+@summon <nome do monstro / ID> {<duração>}
 
-Spawns a clone of the specified player.
-@clone will spawn a supportive clone.
-@slaveclone will spawn a supportive clone that follows the creator around.
-@evilclone will spawn an aggressive clone.
+Gera mobs que tratá-lo como seu mestre.
+Se a duração for especificado, eles vão ficar com você até a duração terminou.
 
 ---------------------------------------
 
-@item <item name/ID> {<amount>}
-/item <item name/ID>
-@delitem <item name/ID> <amount>
+@clone <nome do jogador / ID>
+@slaveclone <nome do jogador / ID>
+@evilclone <nome do jogador / ID>
 
-Creates or removes the specified item.
-If an amount is given for @item, that number will be created.
-
----------------------------------------
-
-@item2 <item name/ID> <quantity> <identify_flag> <refine> <attribute> <card1> <card2> <card3> <card4>
-
-Creates an item with the given parameters (the 'cards' can be any item).
-identify_flag: 0 = unidentified, 1 = identified
-attribute: 0 = not broken, 1 = broken
-
----------------------------------------
- 
-@itembound <item name/ID> <amount> <bound_type>
-
-Creates the specified item and bounds it to the account.
-bound_type: 1 = Account, 2 = Guild, 3 = Party, 4 = Character
+Gera um clone do jogador especificado.
+@clone vai gerar um clone de suporte.
+@slaveclone vai gerar um clone de suporte que segue o criador redor.
+@evilclone vai gerar um clone agressivo.
 
 ---------------------------------------
 
-@itembound2 <item name/ID> <quantity> <identify_flag> <refine> <attribute> <card1> <card2> <card3> <card4> <bound_type>
+@item <item name / ID> {<montante>}
+/ Item <nome do item / ID>
+@delitem <item name / ID> <montante>
 
-Creates an item with the given parameters (the 'cards' can be any item) and bounds it to the account.
-identify_flag: 0 = unidentified, 1 = identified
-attribute: 0 = not broken, 1 = broken
-bound_type: 1 = Account, 2 = Guild, 3 = Party, 4 = Character
-
----------------------------------------
-
-@produce <equip name/ID> <element> <# of Very's>
-
-Creates a weapon with the given parameters.
-
-Example:
-@produce 1602 1 2
--> crafts an item called "Very Very Strong Char's Ice Rod".
+Cria ou remove o item especificado.
+Se uma quantidade é dada para @item, esse número será criado.
 
 ---------------------------------------
 
-@refine <equip position> <+/- amount>
+@ Item2 <item name / ID> <quantidade> <identify_flag> <refinar> <atributo> <card1> <card2> <card3> <card4>
 
-Refines an equipped item by the specified amount.
-0: All Equipment
-1: Lower Headgear
-2: Right Hand
+Cria um item com os parâmetros dados (os "cartões" pode ser qualquer item).
+identify_flag: 0 = não identificado, 1 = identificados
+atributo: 0 = não quebrado, 1 = quebrado
+
+---------------------------------------
+ 
+@itembound <item name / ID> <montante> <bound_type>
+
+Cria o item especificado e barrancos-lo à conta.
+bound_type: 1 = Conta, 2 = Guild, 3 = Party, 4 = Character
+
+---------------------------------------
+
+@ Itembound2 <item name / ID> <quantidade> <identify_flag> <refinar> <atributo> <card1> <card2> <card3> <card4> <bound_type>
+
+Cria um item com os parâmetros dados (os "cartões" pode ser qualquer item) e barrancos-lo à conta.
+identify_flag: 0 = não identificado, 1 = identificados
+atributo: 0 = não quebrado, 1 = quebrado
+bound_type: 1 = Conta, 2 = Guild, 3 = Party, 4 = Character
+
+---------------------------------------
+
+@produce <equipar nome / ID> <element> <Nº de Muito é>
+
+Cria uma arma com os parâmetros dados.
+
+Exemplo:
+@produce 1.602 1 2
+-> Artesanato um item chamado "Very Very Strong Char Ice Rod".
+
+---------------------------------------
+
+@refine <posição equipar> <+/- montante>
+
+Refina um item equipado pela quantidade especificada.
+0: Todos Equipamentos
+1: Baixo da Cabeça
+2: Mão Direita
 4: Garment
-8: Left Accessory
+8: Acessório Esquerda
 16: Body Armor
-32: Left Hand
+32: Mão Esquerda
 64: Shoes
-128: Right Accessory
-256: Top Headgear
-512: Mid Headgear
+128: Direito Acessório
+256: Top Chapelaria
+512: Mid Chapelaria
 
 ---------------------------------------
 
-@repairall
+@reparar tudo
 
-Repairs all broken items in your inventory.
+Repara todos os itens quebrados em seu inventário.
 
 ---------------------------------------
 
 @dropall
 
-Drops all inventory and equipped items onto the floor.
+Gotas todos os itens de estoque e equipados para o chão.
 
 ---------------------------------------
 
 @storeall
 
-Places all inventory and equipped items directly into your Kafra Storage.
+Coloca todos os itens de inventário e equipados diretamente em seu armazenamento Kafra.
 
 ---------------------------------------
 
 @itemreset
 
-Deletes all inventory items (not equipped items).
+Exclui todos os itens de estoque (não itens equipados).
 
 ---------------------------------------
 
-@clearstorage
+@armazenagem limpa
 @cleargstorage
 
-Deletes all items in storage (or guild storage).
+Exclui todos os itens de armazenamento (ou armazenamento guilda).
 
 ---------------------------------------
 
 @clearcart
 
-Deletes all items in cart, but does not remove the cart.
+Exclui todos os itens no carrinho, mas não remove o carrinho.
 
 ---------------------------------------
 
 @cleanarea
 @cleanmap
 
-Deletes floor items in sight range or across the entire map.
+Exclui itens de piso na faixa vista ou em todo o mapa.
 
 ---------------------------------------
 
-@save
+@salvar
 
-Sets your save point as your current map coordinates.
+Define o seu ponto de salvaguarda como o seu mapa atual coordenadas.
 
 ---------------------------------------
 
 @memo {<0-2>}
 
-Saves a warp point for the "Warp Portal" skill.
-If a number is not specified, the command will output all currently saved locations.
-Location "void" indicates an empty warp point.
+Salva um ponto de warp para a habilidade "urdidura Portal".
+Se um número não for especificado, a saída vai comandar todos atualmente locais salvos.
+Localização "vazio" indica um ponto de warp vazio.
 
 ---------------------------------------
 
-@load
+@carga
 
-Warps to your save point.
-
----------------------------------------
-
-@jump
-
-Warps to a random coordinate on the current map.
+Deforma a seu ponto de salvaguarda.
 
 ---------------------------------------
 
-@go {<location name/ID>}
+@saltar
 
-Warps to predefined locations in major cities.
-If no ID is given, all available maps will be displayed in the chat window.
-Locations and coordinates are stored in '/src/map/atcommand.c'.
+Deforma a um aleatória de coordenadas no mapa atual.
+
+---------------------------------------
+
+@go {<nome do local / ID>}
+
+Deforma para locais pré-definidos nas grandes cidades.
+Se nenhum ID é dado, todos os mapas disponíveis serão exibidos na janela de chat.
+Localizações e coordenadas são armazenadas em '/src/map/atcommand.c'.
 
 ---------------------------------------
 
 @warp <map> {<x> <y>}
-/mm <map> {<x> <y>}
-/mapmove <map> {<x> <y>}
+/ Mm <map> {<x> <y>}
+/ Mapmove <map> {<x> <y>}
 
-Warps to the specified map.
-If no coordinates are entered, a random location will be chosen.
-
----------------------------------------
-
-@jumpto <player name/ID>
-@follow <player name>
-
-Warps to the specified player.
-Additionally, @follow will track the player's movements until turned off.
+Deforma com o mapa especificado.
+Se não coordenadas são inseridas, um local aleatório será escolhido.
 
 ---------------------------------------
 
-@recall <player name>
-/recall <player name>
+@jumpto <nome do jogador / ID>
+@follow <nome do jogador>
+
+Deforma para o jogador especificado.
+Além disso, @follow irá acompanhar os movimentos do jogador até ser desligado.
+
+---------------------------------------
+
+@recall <nome do jogador>
+/ Chamada <nome do jogador>
 @recallall
 
-Warps a character to your position.
-Additionally, @recallall will recall the entire server.
+Deforma um personagem para a sua posição.
+Além disso, @recallall vai lembrar todo o servidor.
 
 ---------------------------------------
 
-@tonpc <npc name>
+@tonpc <nome do NPC>
 
-Warps to the specified npc.
+Deforma com o NPC especificado.
 
 ---------------------------------------
 
-@killer
+@assassino
 
-Allows you to attack other players outside of PvP.
+Permite atacar outros jogadores fora do PvP.
 
 ---------------------------------------
 
 @killable
 
-Allows other players to attack you outside of PvP.
+Permite que outros jogadores para atacá-lo fora do PvP.
 
 ---------------------------------------
 
-@blvl <+/- amount>
-@jlvl <+/- amount>
+@blvl <+/- montante>
+@jlvl <+/- montante>
 
-Changes base or job level by the specified amount.
-
----------------------------------------
-
-@str <+/- amount>
-@agi <+/- amount>
-@vit <+/- amount>
-@int <+/- amount>
-@dex <+/- amount>
-@luk <+/- amount>
-
-Changes the specified stat of your character.
+base de alterações ou o nível de emprego pela quantidade especificada.
 
 ---------------------------------------
 
-@allstats
+@str <+/- montante>
+@agi <+/- montante>
+@vit <+/- montante>
+@int <+/- montante>
+@dex <+/- montante>
+@luk <+/- montante>
 
-Sets all stats to the maximum (default is 99).
+Altera o status especificado de seu personagem.
+
+---------------------------------------
+
+@todas as estatísticas
+
+Define todas as estatísticas ao máximo (o padrão é 99).
 
 ---------------------------------------
 
 @allskill
 
-Gives your character all skills in their current skill tree.
+Dá o seu personagem todas as habilidades em sua árvore de habilidade atual.
 
 ---------------------------------------
 
-@stpoint <+/- amount>
-@skpoint <+/- amount>
+@stpoint <+/- montante>
+@skpoint <+/- montante>
 
-Changes unused status or skill points by the specified amount.
+Muda de status ou habilidade não utilizados pontos pela quantidade especificada.
 
 ---------------------------------------
 
 @streset
 @skreset
-@reset
+@reiniciar
 
-Resets stats (@streset), skills (@skreset), or both (@reset).
+Repõe estatísticas (@streset), habilidades (@skreset), ou ambos (@reset).
 
 ---------------------------------------
 
 @feelreset
 
-Resets a Star Gladiator's marked maps.
+Redefine mapas marcados de uma estrela de Gladiador.
 
 ---------------------------------------
 
-@jobchange <job name/ID>
+@jobchange <nome do trabalho / ID>
 
-Changes your job.
-If no job is given, a list of all available jobs will be returned.
-Note that jobs 22 (Wedding), 26 (Summer), and 27 (Christmas) are not available via @job.
+Muda o seu trabalho.
+Se nenhum trabalho for dado, será devolvida uma lista de todos os postos de trabalho disponíveis.
+Note-se que os trabalhos 22 (casamento), 26 (Verão), e 27 (Natal) não estão disponíveis através @job.
 
 ---------------------------------------
 
 @speed <0-1000>
 
-Sets the speed at which the character walks and attacks.
-Default is 150 (0 is fastest, 1000 is slowest).
+Define a velocidade a que o personagem anda e ataques.
+O padrão é 150 (0 é o mais rápido, 1000 é mais lento).
 
 ---------------------------------------
 
 @spiritball <0-100>
 
-Summons the specified amount of spirit spheres around you.
+Invoca a quantidade especificada de esferas do espírito ao seu redor.
 
 ---------------------------------------
 
 @mount
-@mount2
+@ mount2
 
-Toggles mounting/unmounting a peco (@mount) or cash mount (@mount2).
-
----------------------------------------
-
-@zeny <+/- amount>
-
-Changes Zeny by the specified amount.
+Alterna de montagem / desmontagem de um peco (@mount) ou dinheiro montar (@ mount2).
 
 ---------------------------------------
 
-@cash <+/- amount>
+@zeny <+/- montante>
 
-Changes Cash Points by the specified amount.
-
----------------------------------------
-
-@points <+/- amount>
-
-Changes Kafra Points by the specified amount.
+Altera Zeny pela quantidade especificada.
 
 ---------------------------------------
 
-@model <hair style> <hair color> <cloth color>
+@cash <+/- montante>
+
+Alterações Caixa Points by a quantidade especificada.
+
+---------------------------------------
+
+@points <+/- montante>
+
+Altera Kafra Points by a quantidade especificada.
+
+---------------------------------------
+
+@model <estilo de cabelo> <cor do cabelo> <cor pano>
 @hairstyle <default: 0-27>
 @haircolor <default: 0-8>
 @dye <default: 0-4>
 
-Changes appearance based on the given parameters.
-The min/max values are set in 'conf/map/battle/client.conf'.
+Alterações aparência com base nos parâmetros indicados.
+Os valores mínimo / máximo são definidos em 'conf / map / batalha / client.conf'.
 
 ---------------------------------------
 
 @changelook {position} <view ID>
 
-Changes the player's appearance to the specified view ID.
-If no position is given, the command defaults to headgear.
+Muda a aparência do jogador para o especificado ID vista.
+Se nenhuma posição for dada, os padrões de comando para chapelaria.
 1: Top
-2: Middle
-3: Bottom
-4: Weapon
-5: Shield
+2: Médio
+3: Parte inferior
+4: Arma
+5: Escudo
 6: Shoes
 7: Robe
 
 ---------------------------------------
 
-@fakename {<text string>}
+@fakename {<string text>}
 
-Temporarily changes name to the specified string.
-If no string is given, the character's real name will be re-applied.
+Temporariamente muda o nome para a cadeia especificada.
+Se nenhuma cadeia for dada, o verdadeiro nome do personagem será reaplicada.
 
 ---------------------------------------
 
-@size <0-2>
+@Size <0-2>
 @sizeall <0-2>
 
-Changes your size (0 = Normal, 1 = Small, 2 = Large).
-Additionally, @sizeall will change the size of all online players.
+Altera o tamanho (0 = normal, 1 = pequeno, 2 = grande).
+Além disso, @sizeall irá alterar o tamanho de todos os jogadores on-line.
 
 ---------------------------------------
 
-@duel {<player name>}
-@invite <player name>
-@accept
-@reject
-@leave
+@duel {<nome do jogador>}
+@invite <nome do jogador>
+@aceitar
+@rejeitar
+@sair
 
-Duel-organizing commands.
-Some options can be found in 'conf/map/battle/misc.conf'.
-
----------------------------------------
-
-@heal
-
-Fully heals HP and SP. 
+Duel-organizar comandos.
+Algumas opções podem ser encontradas no 'conf / map / batalha / misc.conf'.
 
 ---------------------------------------
 
-@alive
+@curar
+
+Totalmente cura HP e SP.
+
+---------------------------------------
+
+@vivo
 @raisemap
-@raise
+@levantar
 
-Resurrection commands.
-@alive will revive the attached player.
-@raisemap will revive all players on the map.
-@raise will revive all players on the server.
+comandos ressurreição.
+@alive irá reviver o jogador anexado.
+@raisemap vai reviver todos os jogadores no mapa.
+@raise vai reviver todos os jogadores no servidor.
 
 ---------------------------------------
 
-@disguise <monster/npc name/ID>
+@disguise <monstro / NPC nome / ID>
 @undisguise
-@disguiseall <monster/npc name/ID>
+@disguiseall <monstro / NPC nome / ID>
 @undisguiseall
 
-Disguises or undisguises player as a monster/NPC sprite.
-Additionally, @disguiseall/@undisguiseall will disguise all online players.
+Disfarces ou undisguises jogador como um monstro / NPC Sprite.
+Além disso, @ disguiseall / @ undisguiseall vão disfarçar todos os jogadores on-line.
 
 ---------------------------------------
 
 @monsterignore
 
-Makes you immune to attacks (monsters/players/skills cannot target/hit you).
+Faz você imune a ataques (monstros / jogadores / habilidades não pode alvejar / bater em você).
 
 ---------------------------------------
 
-@hide
-/hide
+@esconder
+/esconder
 
-Toggles GM Hide (total invisibility to characters and monsters).
+Alterna GM Hide (invisibilidade total a personagens e monstros).
 
 ---------------------------------------
 
-@npctalk <npc name> <message>
+@npctalk <nome do NPC> <mensagem>
 
-Command what other npcs say.
-Displays the message above the NPC's head (like the 'npctalk' script command).
+Comando o que dizem outros NPCs.
+Exibe a mensagem acima da cabeça do NPC (como o comando script 'npctalk').
 
 ---------------------------------------
 
 ==============================
-| 5. Administrative Commands |
+| 5. Comandos Administrativos |
 ==============================
 
 @email <current@email.tld> <new@email.tld>
 
-Changes the email address attached the player's account.
-Note: This command doesn't validate the email address itself, but checks the structure of the email (xxx@xxx).
+Altera o endereço de e-mail anexado a conta do jogador.
+Nota: Este comando não valida o próprio endereço de e-mail, mas verifica a estrutura do e-mail (xxx @ xxx).
 
-Example:
+Exemplo:
 @email a@b.com b@b.com
 
-Output:
-Fail message: Invalid email. If you have default e-mail, type a@a.com.
-Success message: Information sent to login-server via char-server.
+Saída:
+Mensagem de falha: e-mail inválido. Se você tem padrão de e-mail, digite a@a.com.
+Mensagem de sucesso: Informações enviadas para o login-servidor através de char-server.
 
 ---------------------------------------
 
 @changesex
 
-Changes the gender attached to the player's account.
+Muda o sexo anexado a conta do jogador.
 
 ---------------------------------------
 
-@marry <player 1> <player 2>
+@marry <player 1> <jogador 2>
 @divorce <player>
 
-Marries or divorces two players.
+Se casa ou se divorcia de dois jogadores.
 
 ---------------------------------------
 
-@request <message>
+@request <mensagem>
 
-Sends a message to all connected GMs (via the GM whisper system).
+Envia uma mensagem para todos os GMs conectados (através do sistema whisper GM).
 
 ---------------------------------------
 
 @gmotd
 
-Displays the motd file to all players.
+Exibe o arquivo motd para todos os jogadores.
 
 ---------------------------------------
 
-@broadcast <message>
-/b <message>
-/nb <message>
-@localbroadcast <message>
-/lb <message>
-/nlb <message>
+@broadcast <mensagem>
+/ B <mensagem>
+/ Nb <mensagem>
+@localbroadcast <mensagem>
+/ Lb <mensagem>
+/ NLB <mensagem>
 
-Announces a message in yellow text.
-Except for /nb and /nlb, the message will be prefixed with the name of the attached character.
-@broadcast will be shown to the entire server.
-@localbroadcast will be shown on the player's map only.
+Anuncia uma mensagem de texto amarelo.
+Exceto para / nb e / NLB, a mensagem será prefixado com o nome do personagem anexado.
+@broadcast será mostrado para todo o servidor.
+@localbroadcast será mostrado no único mapa do jogador.
 
 ---------------------------------------
 
-@kami <message>
-@kamib <message>
-@kamic <color> <message>
-@lkami <message>
+@kami <mensagem>
+@kamib <mensagem>
+@kamic <cor> <mensagem>
+@lkami <mensagem>
 
-Announces a message without a name prefix.
-@kami will broadcast in yellow text.
-@kamib will broadcast in blue text.
-@kamic will broadcast in the specified color (a hexadecimal value).
-@lkami will broadcast on the attached character's current map.
+Anuncia uma mensagem sem um prefixo de nome.
+@kami irá transmitir no texto amarelo.
+@kamib irá transmitir no texto azul.
+@kamic vai transmitir na cor especificada (um valor hexadecimal).
+@lkami irá transmitir no mapa atual do personagem anexado.
 
-Example:
-@kamic FF0000 This message is in red.
+Exemplo:
+@kamic FF0000 Esta mensagem está no vermelho.
 
 ---------------------------------------
 
 @killmonster
-@killmonster2
+@ killmonster2
 
-Kills all monsters on the map.
-Additionally, @killmonster2 will prevent the monsters from dropping items (except looted items).
+Mata todos os monstros no mapa.
+Além disso, @ killmonster2 vai impedir que os monstros de cair itens (exceto itens saqueados).
 
 ---------------------------------------
 
-@kill
-@nuke <player name>
+@matar
+@nuke <nome do jogador>
 @doommap
 @doom
 
-Kill commands.
-@kill will kill the attached player.
-@nuke will kill the specified player and deal area splash damage.
-@doommap will kill all players on the map.
-@doom will kill all players on the server.
+Matar comandos.
+@kill vai matar o jogador anexado.
+@nuke vai matar o dano espalhado especificado jogador e área de negócio.
+@doommap vai matar todos os jogadores no mapa.
+@doom vai matar todos os jogadores no servidor.
 
 ---------------------------------------
 
-@mute <time> <player name>
+@mute <time> <nome do jogador>
 @mutearea <time>
-@unmute <player name>
+@unmute <nome do jogador>
 
-Mutes or unmutes a player (prevents talking, usage of skills, and commands).
-@mutearea will mute every player on screen for the specified time.
-
----------------------------------------
-
-@jail <player name>
-@jailfor <time> <player name>
-@unjail <player name>
-
-Sends the specified character to jail.
-If a time is not specified (jailfor), the player will be jailed indefinitely.
+Ativa ou desativa um jogador (impede a falar, o uso de habilidades e comandos).
+@mutearea vai silenciar todos os jogadores na tela durante o tempo especificado.
 
 ---------------------------------------
 
-@kick <player name/ID>
+@jail <nome do jogador>
+@jailfor <time> <nome do jogador>
+@unjail <nome do jogador>
+
+Envia o caractere especificado para a cadeia.
+Se um tempo não é especificado (jailfor), o jogador vai ser preso indefinidamente.
+
+---------------------------------------
+
+@kick <nome do jogador / ID>
 @kickall
 
-Disconnects a user or all users from the server.
+Desconecta um usuário ou todos os usuários do servidor.
 
 ---------------------------------------
 
-@ban <+/- time> <player name>
-@unban <player name>
+@ban <+/- time> <nome do jogador>
+@unban <nome do jogador>
 
-Bans or unbans a player for a limited time.
-Time elements: y/a, m, d/j, h, mn, s
+Proibições ou unbans um jogador por um tempo limitado.
+elementos horárias: y / a, m, d / j, h, Mn, S
 
-Example:
-@ban +2d Char2
--> bans Char2's account for 2 days.
+Exemplo:
+@ban + 2d char2
+-> Proíbe a conta de char2 por 2 dias.
 
 ---------------------------------------
 
-@block <player name>
-@unblock <player name>
+@block <nome do jogador>
+@unblock <nome do jogador>
 
-Blocks or unblocks a player from logging in indefinitely.
+Blocos ou desbloqueia um jogador de login indefinidamente.
 
 ---------------------------------------
 
 @mapexit
 
-Sends quit signal to mapserver, saving all data and causing a graceful shutdown.
-This will also send a packet to clients causing them to close.
+Envia sair sinal para mapserver, salvando todos os dados e causando um desligamento normal.
+Isso também irá enviar um pacote para clientes levando-os a fechar.
 
 ---------------------------------------
 
@@ -1147,12 +1076,12 @@ This will also send a packet to clients causing them to close.
 @reloadquestdb
 @reloadscript
 
-Reloads the specified database.
+Recarrega o banco de dados especificado.
 -itemdb: Item Database
--mobdb: Monster Database
--skilldb: Skill Database
--questdb: Quest Database
--script: NPC Scripts
+-mobdb: Monster Banco de Dados
+-skilldb: Habilidade de banco de dados
+-questdb: Base de dados quest
+-script: Scripts de NPC
 
 ---------------------------------------
 
@@ -1162,296 +1091,291 @@ Reloads the specified database.
 @reloadpcdb
 @reloadmotd
 
-Reloads the specified configuration file.
--atcommand: Atcommand Settings
--battleconf: Battle Settings (may require relog)
--statusdb: Status Settings
--pcdb: Player Settings
--motd: Message of the Day
+Recarrega o arquivo de configuração especificado.
+-atcommand: Configurações Atcommand
+-battleconf: Configurações da batalha (pode exigir relog)
+-statusdb: configurações de status
+-pcdb: Configurações do jogador
+-motd: Mensagem do Dia
 
 ---------------------------------------
 
-@set <variable> {<value>}
+@set <variável> {<value>}
 
-Changes a player or account variable to the specified value.
-If no value is given, the variable's current value will be displayed.
-Note that the value of a string variable may be typed with or without double quotes.
-
----------------------------------------
-
-@setbattleflag <flag> <value>
-
-Changes a battle_config flag without rebooting the server.
+Altera uma variável jogador ou conta para o valor especificado.
+Se nenhum valor é dado, o valor atual da variável será exibido.
+Note-se que o valor de uma variável de cadeia podem ser digitados com ou sem aspas.
 
 ---------------------------------------
 
-@adjgroup <group ID>
+@setbattleflag <flag> <valor>
 
-Changes the group of a character (lasts until relog).
-The groups are specified in 'conf/groups.conf'.
-
----------------------------------------
-
-@addperm {<permission name>}
-@rmvperm {<permission name>}
-
-Changes the permissions of a character (lasts until relog).
-If no permission is given, a list of available permissions will be returned.
+Altera uma bandeira battle_config sem reiniciar o servidor.
 
 ---------------------------------------
 
-@npcmove <x> <y> <npc name>
+@adjgroup <grupo ID>
 
-Moves an NPC to a specified coordinate on its map.
-
----------------------------------------
-
-@hidenpc <npc name>
-@shownpc <npc name>
-
-Toggles the visibility of an NPC's sprite.
+Altera o grupo de um personagem (dura até relog).
+Os grupos são especificados em 'conf / groups.conf'.
 
 ---------------------------------------
 
-@loadnpc <path>
+@addperm {<nome de permissão>}
+@rmvperm {<nome de permissão>}
 
-Loads an NPC script by path.
-
-Example:
-@loadnpc npc/custom/jobmaster.txt
-
----------------------------------------
-
-@unloadnpc <npc name>
-
-Unloads an NPC.
-
-Example:
-@unloadnpc Job Master
+Altera as permissões de um personagem (dura até relog).
+Se nenhuma permissão é dada, será devolvida uma lista de permissões disponíveis.
 
 ---------------------------------------
 
-@unloadnpcfile <path>
+@npcmove <x> <y> <nome do NPC>
 
-Unloads all NPCs in a file.
+Move um NPC a uma coordenada especificada em seu mapa.
 
-Example:
-@unloadnpcfile npc/custom/jobmaster.txt
+---------------------------------------
+
+@hidenpc <nome do NPC>
+@shownpc <nome do NPC>
+
+Alterna a visibilidade do sprite de um NPC.
+
+---------------------------------------
+
+@loadnpc <caminho>
+
+Carrega um roteiro NPC pelo caminho.
+
+Exemplo:
+@loadnpc NPC / custom / jobmaster.txt
+
+---------------------------------------
+
+@unloadnpc <nome do NPC>
+
+Descarrega um NPC.
+
+Exemplo:
+@unloadnpc Mestre Job
+
+---------------------------------------
+
+@unloadnpcfile <caminho>
+
+Descarrega todos os NPCs em um arquivo.
+
+Exemplo:
+@unloadnpcfile NPC / custom / jobmaster.txt
 
 ---------------------------------------
 
 =====================
-| 6. Party Commands |
+| 6. Comandos do partido |
 =====================
 
 @party <party_name>
 
-Organizes a new party, with the attached character as leader.
- 
+Organiza um novo partido, com o personagem que figura como líder.
+ 
 ---------------------------------------
 
-@partyoption <pickup share: yes/no> <item distribution: yes/no>
+@partyoption <captador partes: sim / não> <distribuição de itens: sim / não>
 
-Changes party options for experience sharing and item sharing.
+Altera opções do partido para a partilha de experiências e partilha item.
 
 ---------------------------------------
 
 @changeleader <party_member_name>
 
-Changes the leader of your party to another member.
-You must be the party leader to use this command.
+Muda o líder do seu partido para outro membro.
+Você deve ser o líder do partido para usar este comando.
 
 ---------------------------------------
 
-@partyrecall <party name>
+@partyrecall <nome do partido>
 
-Warps all online characters of a party to your location.
+Deforma todos os personagens online de uma festa para a sua localização.
 
 ---------------------------------------
 
-@partyspy <party name>
+@partyspy <nome do partido>
 
-Allows you to spy on any party's Party Chat.
-At least one member of that party must be online.
-NOTE: map server needs to be configured to enable spying to use this command (enable_spy: true)
+Permite que você para espionar Party Chat qualquer partido.
+Pelo menos um membro desse partido deve ser online.
+NOTA: servidor de mapas precisa ser configurado para permitir a espionagem para usar este comando (enable_spy: true)
 
 ---------------------------------------
 
 =====================
-| 7. Guild Commands |
+| 7. Comandos de Guild |
 =====================
 
-@guild <guild name>
+@guild <nome do clã>
 
-Creates a new guild, with the attached character as guildmaster.
+Cria uma nova aliança, com o personagem que figura como guildmaster.
 
 ---------------------------------------
 
 @breakguild
 
-Breaks the guild of the attached character.
-You must be the guildmaster to use this command.
+Rompe a aliança do personagem anexado.
+Você deve ser o dono para usar este comando.
 
 ---------------------------------------
 
 @changegm <guild_member_name>
 
-Changes the guildmaster of your guild to another member.
-You must be the guildmaster to use this command.
+Muda o dono da sua aliança para outro membro.
+Você deve ser o dono para usar este comando.
 
 ---------------------------------------
 
 @guildstorage
 
-Opens your guild storage.
+Abre o seu armazenamento aliança.
 
 ---------------------------------------
 
-@glvl <+/- amount>
+@glvl <+/- montante>
 
-Changes guild level by the specified amount.
+nível mudanças aliança pela quantidade especificada.
 
 ---------------------------------------
 
-@disguiseguild <monster/npc name/ID> <guild name/ID>
+@disguiseguild <nome do monstro / NPC / ID> <nome do clã / ID>
 @undisguiseguild
 
-Disguises or undisguises all online characters of a guild.
- 
+Disfarces ou undisguises todos os personagens online de uma guilda.
+ 
 ---------------------------------------
 
-@sizeguild <size> <guild name>
+@sizeguild <size> <nome do clã>
 
-Changes the size of all online characters of a guild.
-
----------------------------------------
-
-@guildrecall <guild name>
-
-Warps all online characters of a guild to your location.
+Altera o tamanho de todos os personagens online de uma aliança.
 
 ---------------------------------------
 
-@guildspy <guild name>
+@guildrecall <nome do clã>
 
-Allows you to spy on any guild's Guild Chat. 
-At least one member of that guild must be online.
-NOTE: map server needs to be configured to enable spying to use this command (enable_spy: true)
+Deforma todos os personagens online de uma aliança a sua localização.
+
+---------------------------------------
+
+@guildspy <nome do clã>
+
+Permite-lhe espionar qualquer aliança Grêmio bate-papo.
+Pelo menos um membro desse clã deve estar online.
+NOTA: servidor de mapas precisa ser configurado para permitir a espionagem para usar este comando (enable_spy: true)
 
 ---------------------------------------
 
 ===================
-| 8. Pet Commands |
+| 8. Comandos do animal de estimação |
 ===================
 
-@makeegg <egg ID>
+@makeegg <ovo ID>
 
-Creates a Pet Egg based on the given ID.
-
----------------------------------------
-
-@hatch
-
-Opens the Hatch window (like using a Pet Incubator).
+Cria um ovo animal de estimação com base na ID dado.
 
 ---------------------------------------
 
-@pettalk <message>
+@chocar
 
-Command what the player's pet will say.
+Abre a janela Hatch (como usar uma Incubadora Pet).
+
+---------------------------------------
+
+@pettalk <mensagem>
+
+Comandar o animal de estimação do jogador vai dizer.
 
 ---------------------------------------
 
 @petrename
 
-If you have not already renamed your pet, you can do this on the Pet window.
-If you have renamed your pet, this command will allow you to use the
-the rename option on the window again.
+Se você ainda não tenha renomeado seu animal de estimação, você pode fazer isso na janela de estimação.
+Se você tiver renomeado seu animal de estimação, este comando irá permitir que você use o
+a opção de mudança de nome na janela novamente.
 
 ---------------------------------------
 
 @petfriendly <0-1000>
 
-Sets the intimacy level of your pet, with 1000 being "Loyal".
+Define o nível de intimidade do seu animal de estimação, com 1000 sendo "leal".
 
 ---------------------------------------
 
 @pethungry <0-100>
 
-Sets the hunger level of your pet, with 100 being "Stuffed".
+Define o nível de fome do seu animal de estimação, com 100 sendo "recheado".
 
 ---------------------------------------
 
 ==========================
-| 9. Homunculus Commands |
+| 9. Comandos Homúnculo |
 ==========================
 
 @makehomun <Homunculus ID>
 
-Creates the specified homunculus.
+Cria o homúnculo especificado.
 
 ---------------------------------------
 
 @homevolution
 @hommutate {<Homunculus ID>}
 
-Evolves or mutates your homunculus, if possible.
-If no Homunculus ID is specified for @hommutate, a random ID is chosen.
-If it doesn't work, the /swt emotion is shown.
+Evolui ou se transforma o seu homúnculo, se possível.
+Se nenhum ID Homunculus é especificado para @hommutate, um ID aleatório é escolhido.
+Se isso não funcionar, a emoção / SWT é mostrado.
 
 ---------------------------------------
 
 @hominfo
 @homstats
 
-Displays homunculus stats in different formats.
+Exibe estatísticas homúnculo em diferentes formatos.
 
-Output Example [@hominfo]:
-Homunculus Stats:
+Exemplo de saída [@hominfo]:
+Estatísticas homúnculo:
 HP: 153/153 - SP: 54/54
-ATK: 59 - MATK: 69~69
-Hungry: 29 - Intimacy: 5
-Stats: Str 24 / Agi 25 / Vit 18 / Int 40 / Dex 31 / Luk 14
+ATK: 59 - MATK: 69 ~ 69
+Hungry: 29 - Intimidade: 5
+Estatísticas: Str 24 / Agi 25 / Vit 18 / Int 40 / Dex 31 / Luk 14
 
-Output Example [@homstats]:
-Homunculus growth stats (Lv 1 Lif):
-Max HP: 153 (151~160)
-Max SP: 54 (50~60)
-Str: 20 (18~22)
-Agi: 22 (21~24)
-Vit: 16 (16~20)
-Int: 40 (39~45)
-Dex: 29 (25~34)
-Luk: 14 (13~15)
+Exemplo de saída [@homstats]:
+estatísticas de crescimento homúnculo (Lv 1 LIF):
+Max HP: 153 (151 ~ 160)
+SP Máximo: 54 (50 ~ 60)
+Str: 20 (18 ~ 22)
+Agi: 22 (21 ~ 24)
+Vit: 16 (16 ~ 20)
+Int: 40 (39 a 45)
+Dex: 29 (25 ~ 34)
+Luk: 14 (13 a 15)
 
 ---------------------------------------
 
 @homshuffle
-
-Re-calculates homunculus stats, as if the homunculus was re-leveled from level 1.
-
----------------------------------------
-
-@homtalk <message>
-
-Command what the player's homunculus will say.
+Re-calcula estatísticas homúnculo, como se o homúnculo foi re-nivelado do nível 1.
 
 ---------------------------------------
 
-@homlevel <+/- amount>
+@homtalk <mensagem>
+Comandar o homúnculo do jogador vai dizer.
 
-Changes homunculus level by the specified amount.
+---------------------------------------
+
+@homlevel <+/-montante>
+Muda nível homúnculo pela quantidade especificada.
 
 ---------------------------------------
 
 @homfriendly <0-1000>
 
-Sets the intimacy level of your homunculus, with 1000 being "Loyal".
+Define o nível de intimidade do seu homúnculo, com 1000 sendo "leal".
 
 ---------------------------------------
 
 @homhungry <0-100>
 
-Sets the hunger level of your homunculus, with 100 being "Stuffed".
-
----------------------------------------
+Define o nível de fome do seu homúnculo, com 100 sendo "recheado".

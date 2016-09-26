@@ -30,7 +30,7 @@
 //= The Airship System used in the official servers.
 //=========================================================================
 
-//=== Domestic Airship Route ===============================
+//=== Rota domestica do Dirigível ===============================
 // ... -> Juno -> Einbroch -> Lighthalzen -> Einbroch ->
 // -> Juno -> Hugel -> ...
 airplane,243,73,0	script	#AirshipWarp-1	WARPNPC,1,1,{
@@ -49,7 +49,7 @@ OnUnhide:
 
 OnTouch:
 	switch ($@airplanelocation) {
-	case 0: warp "yuno",92,260; end;
+	case 0: warp "juno",92,260; end;
 	case 1: warp "einbroch",92,278; end;
 	case 2: warp "lighthalzen",302,75; end;
 	case 3: warp "hugel",181,146; end;
