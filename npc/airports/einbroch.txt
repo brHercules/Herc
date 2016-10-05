@@ -30,22 +30,22 @@
 //=========================================================================
 
 airport,143,43,5	script	Airport Staff#airport1a::airport1	4_F_01,{
-	mes("[Equipe do Aeroporto]");
-	mes("Bem vindo ao\r"
-		"Aeroporto de Einbroch,\r"
-		"onde oferecemos sem parada\r"
-		"voos para as cidades de\r"
-		"Juno, Lighthalzen e Hugel.");
+	mes("[Airport Staff]");
+	mes("Welcome to the\r"
+		"Einbroch Airport,\r"
+		"where we offer nonstop\r"
+		"flights to the cities of\r"
+		"Juno, Lighthalzen and Hugel.");
 	next;
-	if (select("",Conselho do Dirigível","Cancelar") == 1) {
-		mes("[Equipe do Aeroporto]");
-		mes("A taxa de embarque do Dirigível\r"
-			"é 1,200 zeny, mas se você\r"
-			"adquiriu um bilhete grátis,\r"
-			"não será necessario pagar a taxa. Will\r"
-			"você vai entrar a bordo do dirigível?");
+	if (select("Board the Airship", "Cancel") == 1) {
+		mes("[Airport Staff]");
+		mes("The Airship boarding fee\r"
+			"is 1,200 zeny, but if you've\r"
+			"got a Free Ticket for Airship,\r"
+			"the fee will be waived. Will\r"
+			"you board the Airship?");
 		next;
-		if (select("Sim", "Não") == 1) {
+		if (select("Yes", "No") == 1) {
 			if (countitem(Free_Flying_Ship_Ticket) > 0) {
 				delitem Free_Flying_Ship_Ticket,1;
 				warp "airport",148,51;

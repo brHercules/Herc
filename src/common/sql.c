@@ -144,6 +144,7 @@ int Sql_GetColumnNames(struct Sql *self, const char *table, char *out_buf, size_
 	size_t len;
 	size_t off = 0;
 
+	nullpo_retr(SQL_ERROR, out_buf);
 	if( self == NULL || SQL_ERROR == SQL->Query(self, "EXPLAIN `%s`", table) )
 		return SQL_ERROR;
 
@@ -377,7 +378,8 @@ void Sql_ShowDebug_(struct Sql *self, const char *debug_file, const unsigned lon
 }
 
 /// Frees a Sql handle returned by Sql_Malloc.
-void Sql_Free(struct Sql *self) {
+void Sql_Free(struct Sql *self)
+{
 	if( self )
 	{
 		SQL->FreeResult(self);
@@ -414,6 +416,7 @@ static enum enum_field_types Sql_P_SizeToMysqlIntType(int sz)
 /// @private
 static int Sql_P_BindSqlDataType(MYSQL_BIND* bind, enum SqlDataType buffer_type, void* buffer, size_t buffer_len, unsigned long* out_length, int8* out_is_null)
 {
+	nullpo_retr(SQL_ERROR, bind);
 	memset(bind, 0, sizeof(MYSQL_BIND));
 	switch( buffer_type )
 	{
@@ -422,39 +425,48 @@ static int Sql_P_BindSqlDataType(MYSQL_BIND* bind, enum SqlDataType buffer_type,
 		break;
 		// fixed size
 	case SQLDT_UINT8: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_INT8: bind->buffer_type = MYSQL_TYPE_TINY;
 		buffer_len = 1;
 		break;
 	case SQLDT_UINT16: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_INT16: bind->buffer_type = MYSQL_TYPE_SHORT;
 		buffer_len = 2;
 		break;
 	case SQLDT_UINT32: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_INT32: bind->buffer_type = MYSQL_TYPE_LONG;
 		buffer_len = 4;
 		break;
 	case SQLDT_UINT64: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_INT64: bind->buffer_type = MYSQL_TYPE_LONGLONG;
 		buffer_len = 8;
 		break;
 		// platform dependent size
 	case SQLDT_UCHAR: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_CHAR: bind->buffer_type = Sql_P_SizeToMysqlIntType(sizeof(char));
 		buffer_len = sizeof(char);
 		break;
 	case SQLDT_USHORT: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_SHORT: bind->buffer_type = Sql_P_SizeToMysqlIntType(sizeof(short));
 		buffer_len = sizeof(short);
 		break;
 	case SQLDT_UINT: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_INT: bind->buffer_type = Sql_P_SizeToMysqlIntType(sizeof(int));
 		buffer_len = sizeof(int);
 		break;
 	case SQLDT_ULONG: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_LONG: bind->buffer_type = Sql_P_SizeToMysqlIntType(sizeof(long));
 		buffer_len = sizeof(long);
 		break;
 	case SQLDT_ULONGLONG: bind->is_unsigned = 1;
+		FALLTHROUGH
 	case SQLDT_LONGLONG: bind->buffer_type = Sql_P_SizeToMysqlIntType(sizeof(int64));
 		buffer_len = sizeof(int64);
 		break;
@@ -485,7 +497,8 @@ static int Sql_P_BindSqlDataType(MYSQL_BIND* bind, enum SqlDataType buffer_type,
 /// Prints debug information about a field (type and length).
 ///
 /// @private
-static void Sql_P_ShowDebugMysqlFieldInfo(const char* prefix, enum enum_field_types type, int is_unsigned, unsigned long length, const char* length_postfix) {
+static void Sql_P_ShowDebugMysqlFieldInfo(const char* prefix, enum enum_field_types type, int is_unsigned, unsigned long length, const char* length_postfix)
+{
 	const char *sign = (is_unsigned ? "UNSIGNED " : "");
 	const char *type_string = NULL;
 	switch (type) {
@@ -526,6 +539,7 @@ static void SqlStmt_P_ShowDebugTruncatedColumn(struct SqlStmt *self, size_t i)
 	MYSQL_FIELD* field;
 	MYSQL_BIND* column;
 
+	nullpo_retv(self);
 	meta = mysql_stmt_result_metadata(self->stmt);
 	field = mysql_fetch_field_direct(meta, (unsigned int)i);
 	ShowSQL("DB error - data of field '%s' was truncated.\n", field->name);
@@ -655,8 +669,8 @@ int SqlStmt_BindParam(struct SqlStmt *self, size_t idx, enum SqlDataType buffer_
 	if (idx >= self->max_params)
 		return SQL_SUCCESS; // out of range - ignore
 
-PRAGMA_GCC45(GCC diagnostic push)
-PRAGMA_GCC45(GCC diagnostic ignored "-Wcast-qual")
+PRAGMA_GCC46(GCC diagnostic push)
+PRAGMA_GCC46(GCC diagnostic ignored "-Wcast-qual")
 	/*
 	 * MySQL uses the same struct with a non-const buffer for both
 	 * parameters (input) and columns (output).
@@ -664,7 +678,7 @@ PRAGMA_GCC45(GCC diagnostic ignored "-Wcast-qual")
 	 * dropping a const qualifier here.
 	 */
 	return Sql_P_BindSqlDataType(self->params+idx, buffer_type, (void *)buffer, buffer_len, NULL, NULL);
-PRAGMA_GCC45(GCC diagnostic pop)
+PRAGMA_GCC46(GCC diagnostic pop)
 }
 
 /// Executes the prepared statement.
@@ -865,8 +879,10 @@ void SqlStmt_Free(struct SqlStmt *self)
 		aFree(self);
 	}
 }
+
 /* receives mysql error codes during runtime (not on first-time-connects) */
-void hercules_mysql_error_handler(unsigned int ecode) {
+void hercules_mysql_error_handler(unsigned int ecode)
+{
 	switch( ecode ) {
 	case 2003:/* Can't connect to MySQL (this error only happens here when failing to reconnect) */
 		if( mysql_reconnect_type == 1 ) {
@@ -1032,10 +1048,13 @@ void Sql_HerculesUpdateSkip(struct Sql *self, const char *filename)
 	return;
 }
 
-void Sql_Init(void) {
+void Sql_Init(void)
+{
 	Sql_inter_server_read("conf/common/inter-server.conf", false); // FIXME: Hardcoded path
 }
-void sql_defaults(void) {
+
+void sql_defaults(void)
+{
 	SQL = &sql_s;
 
 	SQL->Connect = Sql_Connect;

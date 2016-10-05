@@ -1,30 +1,30 @@
--- Este arquivo é parte do Hércules.
--- Http://herc.ws - http://github.com/HerculesWS/Hercules
+-- This file is part of Hercules.
+-- http://herc.ws - http://github.com/HerculesWS/Hercules
 --
--- Copyright (C) 2013-2016 Hercules Dev Team
+-- Copyright (C) 2013-2016  Hercules Dev Team
 --
--- Hercules é um software livre: você pode redistribuí-lo e / ou modificá
--- Lo sob os termos da GNU General Public License conforme publicada pela
--- Free Software Foundation, tanto a versão 3 da licença, ou
--- (A seu critério) qualquer versão posterior.
+-- Hercules is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
 --
--- Este programa é distribuído na esperança que possa ser útil,
--- Mas SEM QUALQUER GARANTIA; mesmo sem a garantia implícita de
--- COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM. veja a
--- GNU General Public License para mais detalhes.
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
 --
--- Você deve ter recebido uma cópia da GNU General Public License
--- Junto com este programa. Se não, veja <http://www.gnu.org/licenses/>.
+-- You should have received a copy of the GNU General Public License
+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
--- NOTA: Este arquivo foi gerado automaticamente e nunca deve ser editado manualmente,
--- Como ele irá obter substituído. Se você precisar modificar este ficheiro,
--- Por favor considere modificar o arquivo .conf correspondente dentro
--- A pasta db, e então re-executar o plugin DB2SQL.
+-- NOTE: This file was auto-generated and should never be manually edited,
+--       as it will get overwritten. If you need to modify this file,
+--       please consider modifying the corresponding .conf file inside
+--       the db folder, and then re-run the db2sql plugin.
 
--- Arquivo gerado NÃO EDIT -
+-- GENERATED FILE DO NOT EDIT --
 
 --
--- Estrutura da tabela para a tabela `item_db`
+-- Table structure for table `item_db`
 --
 
 DROP TABLE IF EXISTS `item_db`;
@@ -44,7 +44,7 @@ CREATE TABLE `item_db` (
   `equip_jobs` bigint(20) UNSIGNED DEFAULT NULL,
   `equip_upper` tinyint(8) UNSIGNED DEFAULT NULL,
   `equip_genders` tinyint(2) UNSIGNED DEFAULT NULL,
-  `equip_locations` smallint(4) UNSIGNED DEFAULT NULL,
+  `equip_locations` mediumint(8) UNSIGNED DEFAULT NULL,
   `weapon_level` tinyint(2) UNSIGNED DEFAULT NULL,
   `equip_level_min` smallint(5) UNSIGNED DEFAULT NULL,
   `equip_level_max` smallint(5) UNSIGNED DEFAULT NULL,
