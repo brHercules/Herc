@@ -31,24 +31,19 @@
 //= Official Izlude Airport NPCs
 //=========================================================================
 
--	script	::Airship_Staff_izlude	FAKE_NPC,{
-	mes("[Airship Staff]");
-	mes("Welcome! Would you like\r"
-		"to board the Airship that\r"
-		"departs on the flight wich stops\r"
-		"in Juno and Rachel?");
+-	script	::Airship_Staff_izlude	-1,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo!!";
+	mes "Você gostaria de embarcar no Aeroplano, ele vai para Juno e Rachel.";
 	next;
-	if (select("Board the Airship to Juno/Rachel.", "Cancel.") == 1) {
-		mes("[Airship Staff]");
-		mes("The boarding fee is\r"
-			"1,200 zeny. However, this\r"
-			"charged is waived if you use\r"
-			"a Free Ticket for Airship. Now,\r"
-			"would you still like to board?");
+	if (select("Embarcar.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroplano]";
+		mes "A passagem custa 1.200 zeny.";
+		mes "Deseja comprar uma?";
 		next;
-		if (select("Yes", "No") == 1) {
-			if (countitem(Free_Flying_Ship_Ticket) > 0) {
-				delitem Free_Flying_Ship_Ticket,1;
+		if (select("Sim:Não") == 1) {
+			if (countitem(7311) > 0) {
+				delitem 7311,1; // Bilhete para Aeroplano
 				warp "airplane_01",244,58;
 				end;
 			}
@@ -57,16 +52,14 @@
 				warp "airplane_01",244,58;
 				end;
 			}
-			mes("[Airship Staff]");
-			mes("I'm sorry, but you don't\r"
-				"have 1,200 zeny to pay\r"
-				"for the boarding fee.");
+			mes "[Assistente do Aeroplano]";
+			mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e você não possui a quantidade de zenys suficientes para embarcar.";
+			mes "Lembre, a taxa de embarque é 1,200 zeny.";
 			close;
 		}
 	}
-	mes("[Airship Staff]");
-	mes("Thank you and\r"
-		"please come again.");
-	mes("Have a good day~");
+	mes "[Assistente do Aeroplano]";
+	mes "Muito obrigada!";
+	mes "Volte sempre.";
 	close;
 }

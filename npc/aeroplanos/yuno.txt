@@ -1,0 +1,145 @@
+//================= Hercules Script =======================================
+//=       _   _                     _
+//=      | | | |                   | |
+//=      | |_| | ___ _ __ ___ _   _| | ___  ___
+//=      |  _  |/ _ \ '__/ __| | | | |/ _ \/ __|
+//=      | | | |  __/ | | (__| |_| | |  __/\__ \
+//=      \_| |_/\___|_|  \___|\__,_|_|\___||___/
+//================= License ===============================================
+//= This file is part of Hercules.
+//= http://herc.ws - http://github.com/HerculesWS/Hercules
+//=
+//= Copyright (C) 2012-2016  Hercules Dev Team
+//= Copyright (C)  Muad_Dib
+//= Copyright (C)  L0ne_W0lf
+//=
+//= Hercules is free software: you can redistribute it and/or modify
+//= it under the terms of the GNU General Public License as published by
+//= the Free Software Foundation, either version 3 of the License, or
+//= (at your option) any later version.
+//=
+//= This program is distributed in the hope that it will be useful,
+//= but WITHOUT ANY WARRANTY; without even the implied warranty of
+//= MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//= GNU General Public License for more details.
+//=
+//= You should have received a copy of the GNU General Public License
+//= along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//=========================================================================
+//= Juno Airport Staff
+//================= Description ===========================================
+//= Official Juno Airport Staff
+//=========================================================================
+
+y_airport,143,43,5	script	Assitente do Aeroplano#y_air1a::y_airport1	4_F_01,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao Aeroporto de Juno onde oferecemos voos domésticos para Einbroch, Lighthalzen e Hugel, e internacionais para Izlude e Rachel.";
+	mes "Gostaria de usar algum serviço?";
+	next;
+	if (select("Embarcar no Dirigível.:Cancelar.") == 1) {
+		mes "[Assistente do Aeroplano]";
+		mes "A taxa de embarque do Dirigível é 1,200 zeny, mas se você possuir um Bilhete para Aeroplano, a taxa não será cobrada.";
+		mes "Você deseja embarcar?";
+		next;
+		if (select("Sim:Não") == 1) {
+			if (countitem(7311) > 0) {
+				delitem 7311,1; // Bilhete para Aeroplano
+				warp "y_airport",148,51;
+				end;
+			}
+			if (Zeny >= 1200) {
+				Zeny -= 1200;
+				warp "y_airport",148,51;
+				end;
+			}
+			mes "[Assistente do Aeroplano]";
+			mes "Me desculpe, mas você não possui um Bilhete para Aeroplano e você não possui a quantidade de zenys suficientes para embarcar.";
+			mes "Lembre, a taxa de embarque é 1,200 zeny.";
+			close;
+		}
+	}
+	mes "[Assistente do Aeroplano]";
+	mes "Obrigado e por favor volte novamente.";
+	mes "Tenha um bom dia.";
+	close;
+}
+
+y_airport,158,43,5	duplicate(y_airport1)	Assistente do Aeroplano#y_air1b	4_F_01
+y_airport,126,43,5	duplicate(y_airport1)	Assistente do Aeroplano#y_air1c	4_F_01
+
+y_airport,143,49,3	script	Equipe de Recepção#y_air2a::y_airport2	4_F_01,{
+	mes "[Equipe de Recepção]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Se você acabou de chegar de seu voo, deixe-me guiá-lo até o terminal.";
+	mes "Caso contrário, por favor embarque no dirigível para voar até seu destino.";
+	next;
+	if (select("Sair do terminal principal.:Cancelar") == 1) {
+		mes "[Equipe de Recepção]";
+		mes "Uma vez no terminal principal, você terá que pagar a taxa novamente para embarcar no Dirigível.";
+		mes "Você só deve sair se a cidade de Juno for seu destino final.";
+		mes "Deseja prosseguir para o terminal principal?";
+		next;
+		if (select("Sim:Não") == 1) {
+			warp "y_airport",142,40;
+			end;
+		}
+	}
+	mes "[Equipe de Recepção]";
+	mes "Certo, obrigado pelo seu apoio, e espero que você tenha um voo agradável~";
+	close;
+}
+
+y_airport,126,51,3	duplicate(y_airport2)	Equipe de Recepção#y_air2b	4_F_01
+y_airport,158,50,3	duplicate(y_airport2)	Equipe de Recepção#y_air2c	4_F_01
+
+y_airport,145,63,5	script	Voos Domésticos	4_F_02,{
+	mes "[Equipe de Bordo]";
+	mes "Você deseja embarcar no Dirigível que voa até Einbroch, Lighthalzen e Hugel?";
+	mes "Se sim, por favor deixe-me guiá-lo até a área de embarque do Dirigível.";
+	next;
+	if (select("Sim:Não") == 1) {
+		warp "yuno",59,244;
+		end;
+	}
+	mes "[Equipe de Bordo]";
+	mes "Muito bem, então.";
+	mes "Obrigado por seu clientismo, e espero que você se divirta na viagem~";
+	close;
+}
+
+y_airport,140,63,5	script	Voos Internacionais	4_F_02,{
+	mes "[Equipe de Bordo]";
+	mes "Você deseja embarcar no Dirigível que voa até Juno, Izlude e Rachel?";
+	mes "Se sim, por favor deixe-me guiá-lo até a área de embarque do Dirigível.";
+	next;
+	if (select("Sim:Não") == 1) {
+		warp "yuno",47,244;
+		end;
+	}
+	mes "[Equipe de Bordo]";
+	mes "Certo, então.";
+	mes "Obrigado por voar conosco, e espero que você se divirta enquanto estiver viajando.";
+	close;
+}
+
+yuno,14,262,5	script	Assistente do Aeroplano#yuno01	4_F_02,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Utilize este porta para embarcar no Dirigível que voa até Izlude dentro do Reino de Rune-Midgard, e para Rachel na República de Arunafeltz.";
+	next;
+	mes "[Assistente do Aeroplano]";
+	mes "Caso contrário, se seu destino pretendido é Juno, por favor, desça as escadas e peça a Equipe de Recepção para levar você até o terminal.";
+	mes "Te agradeço, e tenha uma boa viagem.";
+	close;
+}
+
+yuno,88,263,3	script	Assistente do Aeroplano#yuno02	4_F_02,{
+	mes "[Assistente do Aeroplano]";
+	mes "Bem-vindo ao Aeroporto de Juno.";
+	mes "Utilize este porta para embarcar no Dirigível que vai até Einbroch, Lighthalzen e Hugel na República de Schwartzwald.";
+	next;
+	mes "[Assistente do Aeroplano]";
+	mes "Caso contrário, se seu destino pretendido é Juno, por favor, desça as escadas e pergunte a Equipe de Recepção para levar você até o terminal.";
+	mes "Te agradeço, e tenha uma boa viagem.";
+	close;
+}
