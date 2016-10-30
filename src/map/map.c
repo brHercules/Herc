@@ -337,6 +337,7 @@ int map_moveblock(struct block_list *bl, int x1, int y1, int64 tick) {
 		//status_change_end(bl, SC_BLADESTOP, INVALID_TIMER); //Won't stop when you are knocked away, go figure...
 		status_change_end(bl, SC_NJ_TATAMIGAESHI, INVALID_TIMER);
 		status_change_end(bl, SC_MAGICROD, INVALID_TIMER);
+		status_change_end(bl, SC_SU_STOOP, INVALID_TIMER);
 		if (sc && sc->data[SC_PROPERTYWALK] &&
 			sc->data[SC_PROPERTYWALK]->val3 >= skill->get_maxcount(sc->data[SC_PROPERTYWALK]->val1,sc->data[SC_PROPERTYWALK]->val2) )
 			status_change_end(bl,SC_PROPERTYWALK,INVALID_TIMER);
@@ -4138,7 +4139,7 @@ bool map_read_npclist(const char *filename, bool imported)
 	if (!libconfig->load_file(&config, filename))
 		return false;
 
-	deleted_npcs = strdb_alloc(DB_OPT_DUP_KEY|DB_OPT_ALLOW_NULL_DATA, MAP_NAME_LENGTH);
+	deleted_npcs = strdb_alloc(DB_OPT_DUP_KEY|DB_OPT_ALLOW_NULL_DATA, 0);
 
 	// Remove NPCs
 	if ((setting = libconfig->lookup(&config, "npc_removed_list")) != NULL) {

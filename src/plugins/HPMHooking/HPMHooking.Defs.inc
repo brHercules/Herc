@@ -396,8 +396,8 @@ typedef int (*HPMHOOK_pre_chr_rename_char_sql) (struct char_session_data **sd, i
 typedef int (*HPMHOOK_post_chr_rename_char_sql) (int retVal___, struct char_session_data *sd, int char_id);
 typedef int (*HPMHOOK_pre_chr_check_char_name) (char **name, char **esc_name);
 typedef int (*HPMHOOK_post_chr_check_char_name) (int retVal___, char *name, char *esc_name);
-typedef int (*HPMHOOK_pre_chr_make_new_char_sql) (struct char_session_data **sd, const char **name_, int *str, int *agi, int *vit, int *int_, int *dex, int *luk, int *slot, int *hair_color, int *hair_style);
-typedef int (*HPMHOOK_post_chr_make_new_char_sql) (int retVal___, struct char_session_data *sd, const char *name_, int str, int agi, int vit, int int_, int dex, int luk, int slot, int hair_color, int hair_style);
+typedef int (*HPMHOOK_pre_chr_make_new_char_sql) (struct char_session_data **sd, const char **name_, int *str, int *agi, int *vit, int *int_, int *dex, int *luk, int *slot, int *hair_color, int *hair_style, short *starting_job);
+typedef int (*HPMHOOK_post_chr_make_new_char_sql) (int retVal___, struct char_session_data *sd, const char *name_, int str, int agi, int vit, int int_, int dex, int luk, int slot, int hair_color, int hair_style, short starting_job);
 typedef int (*HPMHOOK_pre_chr_divorce_char_sql) (int *partner_id1, int *partner_id2);
 typedef int (*HPMHOOK_post_chr_divorce_char_sql) (int retVal___, int partner_id1, int partner_id2);
 typedef int (*HPMHOOK_pre_chr_count_users) (void);
@@ -5574,6 +5574,8 @@ typedef bool (*HPMHOOK_pre_pc_process_chat_message) (struct map_session_data **s
 typedef bool (*HPMHOOK_post_pc_process_chat_message) (bool retVal___, struct map_session_data *sd, const char *message);
 typedef void (*HPMHOOK_pre_pc_check_supernovice_call) (struct map_session_data **sd, const char **message);
 typedef void (*HPMHOOK_post_pc_check_supernovice_call) (struct map_session_data *sd, const char *message);
+typedef bool (*HPMHOOK_pre_pc_check_basicskill) (struct map_session_data **sd, int *level);
+typedef bool (*HPMHOOK_post_pc_check_basicskill) (bool retVal___, struct map_session_data *sd, int level);
 #endif // MAP_PC_H
 #ifdef MAP_NPC_H /* libpcre */
 typedef pcre* (*HPMHOOK_pre_libpcre_compile) (const char **pattern, int *options, const char ***errptr, int **erroffset, const unsigned char **tableptr);
